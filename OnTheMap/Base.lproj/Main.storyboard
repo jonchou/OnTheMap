@@ -30,7 +30,7 @@
                                     <constraint firstAttribute="height" constant="50" id="ht1-sZ-xUY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWD-j0-Le0">
                                 <rect key="frame" x="20" y="398" width="560" height="50"/>
@@ -50,6 +50,12 @@
                                 <rect key="frame" x="20" y="458" width="560" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UjU-jf-Bbv">
+                                <rect key="frame" x="20" y="492" width="560" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ONS-oh-OLA">
@@ -75,16 +81,24 @@
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="top" secondItem="nfX-zs-CaO" secondAttribute="top" constant="275" id="TY0-97-alF"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="top" secondItem="YGH-Th-Sm3" secondAttribute="bottom" constant="23" id="UKj-YJ-RAU"/>
                             <constraint firstItem="oWD-j0-Le0" firstAttribute="trailing" secondItem="4bb-CS-iKl" secondAttribute="trailing" id="eFu-9n-Z7D"/>
+                            <constraint firstItem="UjU-jf-Bbv" firstAttribute="top" secondItem="POI-jr-bFo" secondAttribute="bottom" constant="10" id="nch-HY-xFN"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="leading" secondItem="4bb-CS-iKl" secondAttribute="leading" id="qC2-og-S3S"/>
+                            <constraint firstItem="UjU-jf-Bbv" firstAttribute="leading" secondItem="nfX-zs-CaO" secondAttribute="leadingMargin" id="rHc-ba-loY"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="leading" secondItem="POI-jr-bFo" secondAttribute="leading" id="sgs-9m-w5s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UjU-jf-Bbv" secondAttribute="trailing" id="vEw-iC-uPG"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="trailing" secondItem="POI-jr-bFo" secondAttribute="trailing" id="xOs-43-rpg"/>
                             <constraint firstItem="4bb-CS-iKl" firstAttribute="top" secondItem="ONS-oh-OLA" secondAttribute="bottom" constant="8" symbolic="YES" id="y26-cE-Q8z"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="debugTextLabel" destination="UjU-jf-Bbv" id="OQd-ka-naY"/>
+                        <outlet property="passwordTextField" destination="4bb-CS-iKl" id="4r0-mw-ZJd"/>
+                        <outlet property="usernameTextField" destination="ONS-oh-OLA" id="9hg-Vq-ZQp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sC4-IX-KmM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-417" y="400"/>
+            <point key="canvasLocation" x="-1023" y="1060"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
