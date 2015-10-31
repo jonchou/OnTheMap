@@ -63,6 +63,7 @@ class LoginViewController: UIViewController {
         } else if passwordTextField.text!.isEmpty {
             debugTextLabel.text = "Password Empty."
         } else {
+            debugTextLabel.text = "Logging in..."
             
             /*
             Steps for Authentication...
@@ -78,47 +79,18 @@ class LoginViewController: UIViewController {
             
             */
         //    self.getRequestToken()
-            createSession()
-            completeLogin()
+            UdacityClient.sharedInstance().authenticateWithUserPass(usernameTextField.text, password: passwordTextField.text) { (success, errorString) in
+                if success {
+                   self.completeLogin()
+                } else {
+                  print("Failed to log in")
+                }
+            }
         }
 
     }
     
-    func createSession() {
-        /* 1. Set the parameters */
-        let jsonBody : [String: AnyObject] = [
-            "udacity": [
-                "username": usernameTextField.text!,
-                "password": passwordTextField.text!
-            ]
-        ]
-        
-        /* 2. Build the URL */
-        let urlString = baseURLSecureString + "session"
-        let url = NSURL(string: urlString)!
-        
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
-        }
-       // let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { data, response, error in
-            guard (error == nil) else {
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.debugTextLabel.text = "Login Failed (Session)."
-                }
-                print("There was an error with your request: \(error)")
-                return
-            }
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-        }
-        task.resume()
-    }
+
     
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
