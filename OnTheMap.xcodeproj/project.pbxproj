@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B01716B1BE862E90079F86B /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B01716A1BE862E90079F86B /* ParseClient.swift */; settings = {ASSET_TAGS = (); }; };
 		7B911BE71BE34F2000902FD8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B911BE61BE34F2000902FD8 /* AppDelegate.swift */; };
 		7B911BE91BE34F2000902FD8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B911BE81BE34F2000902FD8 /* MapViewController.swift */; };
 		7B911BEC1BE34F2000902FD8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B911BEA1BE34F2000902FD8 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B01716A1BE862E90079F86B /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		7B911BE31BE34F2000902FD8 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B911BE61BE34F2000902FD8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B911BE81BE34F2000902FD8 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B0171691BE862A90079F86B /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				7B01716A1BE862E90079F86B /* ParseClient.swift */,
+			);
+			name = Parse;
+			sourceTree = "<group>";
+		};
 		7B911BDA1BE34F2000902FD8 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 		7B911BFC1BE4463A00902FD8 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				7B0171691BE862A90079F86B /* Parse */,
 				7B911BFD1BE4464200902FD8 /* Udacity */,
 			);
 			name = Client;
@@ -176,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B01716B1BE862E90079F86B /* ParseClient.swift in Sources */,
 				7B911BFF1BE4466100902FD8 /* UdacityClient.swift in Sources */,
 				7B911BFA1BE357ED00902FD8 /* LoginViewController.swift in Sources */,
 				7B911BE91BE34F2000902FD8 /* MapViewController.swift in Sources */,
@@ -328,6 +340,7 @@
 				7B911BF71BE34F2000902FD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

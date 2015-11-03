@@ -68,10 +68,19 @@ class UdacityClient {
             }
             
             let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
-           // print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
             
             // parse for session ID
             UdacityClient.parseJSONWithCompletionHandler(newData) { (result, error) in
+                if let account = result["account"] as? [String:AnyObject] {
+                    if let userKey = account["key"] as? String {
+                        print("got key: \(userKey)")
+                    } else {
+                        completionHandler(success: false, sessionID: nil, errorString: "Failed Key")
+                    }
+                } else {
+                    completionHandler(success: false, sessionID: nil, errorString: "Failed Account")
+                }
                 if let session = result["session"] as? [String:AnyObject] {
                     if let sessionID = session["id"] as? String {
                         completionHandler(success: true, sessionID: sessionID, errorString: nil)
