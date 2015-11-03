@@ -94,10 +94,10 @@ class ParseClient {
                     // Finally we place the annotation in an array of annotations.
                     annotations.append(annotation)
                 }
+                completionHandler(success: true, annotations: annotations, error: nil)
             }
         }
         task.resume()
-        completionHandler(success: true, annotations: annotations, error: nil)
     }
     
     /* Helper function: Given a dictionary of parameters, convert to a string for a url */
