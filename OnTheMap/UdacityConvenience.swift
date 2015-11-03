@@ -13,7 +13,7 @@ extension UdacityClient {
     func authenticateWithUserPass (username: String?, password: String?, completionHandler: (success: Bool, errorString: String?) -> Void) {
         createSession(username, password: password) { (success, sessionID, errorString) in
             if success {
-                print(sessionID)
+                print(sessionID!)
             }
             completionHandler(success: success, errorString: errorString)
         }

@@ -21,7 +21,7 @@ class UdacityClient {
         session = NSURLSession.sharedSession()
     }
     
-    func createSession(username: String?, password: String?, completionHandler: (success: Bool, sessionID: String, errorString: String?) -> Void) {
+    func createSession(username: String?, password: String?, completionHandler: (success: Bool, sessionID: String?, errorString: String?) -> Void) {
         /* 1. Set the parameters */
         let jsonBody : [String: AnyObject] = [
             "udacity": [
@@ -41,37 +41,50 @@ class UdacityClient {
         do {
             request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
         }
-        // let session = NSURLSession.sharedSession()
+
         let task = session.dataTaskWithRequest(request) { data, response, error in
+            
             guard (error == nil) else {
-                dispatch_async(dispatch_get_main_queue()) {
-                    print("Login Failed (Session).")
-                }
-                print("There was an error with your request: \(error)")
+                print("Login Failed (Session).")
                 return
             }
-            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
             
-   //         UdacityClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler(result: newData, error: nil))
-
-  /*          if let sessionID = newData["session"] as? String {
-                completionHandler(success: true, sessionID: sessionID!, errorString: nil)
-            } else {
-                completionHandler(success: false, sessionID: nil, errorString: "Failed login")
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                if let response = response as? NSHTTPURLResponse {
+                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                } else if let response = response {
+                    print("Your request returned an invalid response! Response: \(response)!")
+                } else {
+                    print("Your request returned an invalid response!")
+                }
+                return
             }
-  */
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("No data was returned by the request!")
+                return
+            }
+            
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
+           // print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            
+            // parse for session ID
+            UdacityClient.parseJSONWithCompletionHandler(newData) { (result, error) in
+                if let session = result["session"] as? [String:AnyObject] {
+                    if let sessionID = session["id"] as? String {
+                        completionHandler(success: true, sessionID: sessionID, errorString: nil)
+                    } else {
+                        completionHandler(success: false, sessionID: nil, errorString: "Failed Session ID")
+                    }
+                } else {
+                    completionHandler(success: false, sessionID: nil, errorString: "Failed Session")
+                }
+            }
         }
-        task.resume()
         
-/*        if let requestToken = JSONResult[TMDBClient.JSONResponseKeys.RequestToken] as? String {
-            completionHandler(success: true, requestToken: requestToken, errorString: nil)
-        } else {
-            print("Could not find \(TMDBClient.JSONResponseKeys.RequestToken) in \(JSONResult)")
-            completionHandler(success: false, requestToken: nil, errorString: "Login Failed (Request Token).")
-        }
-   */
-        completionHandler(success: true, sessionID: "hello", errorString: nil)
+        task.resume()
     }
     
     class func sharedInstance() -> UdacityClient {
