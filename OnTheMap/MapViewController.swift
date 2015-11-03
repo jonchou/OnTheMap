@@ -29,7 +29,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         ParseClient.sharedInstance().setupMap() { (success, annotations, error) in
             if success {
-                self.mapView.addAnnotations(annotations!)
+                // allows the pins to appear
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.mapView.addAnnotations(annotations!)
+                })
             } else {
                 print(error)
             }
