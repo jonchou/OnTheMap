@@ -17,14 +17,18 @@ class ParseClient {
     /* Shared session */
     var session: NSURLSession
     
+    var myAnnotations: [MKPointAnnotation]
+    
     init() {
         session = NSURLSession.sharedSession()
+        myAnnotations = [MKPointAnnotation]()
     }
     
     // redundant function?
     func setupMap(completionHandler: (success: Bool, annotations: [MKPointAnnotation]?, error: String?) -> Void) {
         getStudentLocations() { (success, annotations, error) in
             if success {
+                self.myAnnotations = annotations
                 completionHandler(success: true, annotations: annotations, error: nil)
             } else {
                 completionHandler(success: false, annotations: nil, error: error)

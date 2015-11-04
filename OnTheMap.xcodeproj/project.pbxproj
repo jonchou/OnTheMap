@@ -16,6 +16,7 @@
 		7B911BFA1BE357ED00902FD8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B911BF91BE357ED00902FD8 /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7B911BFF1BE4466100902FD8 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B911BFE1BE4466100902FD8 /* UdacityClient.swift */; settings = {ASSET_TAGS = (); }; };
 		7B911C011BE4520800902FD8 /* UdacityConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B911C001BE4520800902FD8 /* UdacityConvenience.swift */; settings = {ASSET_TAGS = (); }; };
+		7BF7D3E11BE99D7C00EDAC7D /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7D3E01BE99D7C00EDAC7D /* StudentListViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7B911BF91BE357ED00902FD8 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7B911BFE1BE4466100902FD8 /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		7B911C001BE4520800902FD8 /* UdacityConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConvenience.swift; sourceTree = "<group>"; };
+		7BF7D3E01BE99D7C00EDAC7D /* StudentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			children = (
 				7B911BF91BE357ED00902FD8 /* LoginViewController.swift */,
 				7B911BE81BE34F2000902FD8 /* MapViewController.swift */,
+				7BF7D3E01BE99D7C00EDAC7D /* StudentListViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BF7D3E11BE99D7C00EDAC7D /* StudentListViewController.swift in Sources */,
 				7B01716B1BE862E90079F86B /* ParseClient.swift in Sources */,
 				7B911BFF1BE4466100902FD8 /* UdacityClient.swift in Sources */,
 				7B911BFA1BE357ED00902FD8 /* LoginViewController.swift in Sources */,

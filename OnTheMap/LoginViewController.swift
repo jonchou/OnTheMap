@@ -14,7 +14,6 @@ class LoginViewController: UIViewController {
     let baseURLSecureString = "https://www.udacity.com/api/"
     
     var session: NSURLSession!
-    
     var tapRecognizer: UITapGestureRecognizer? = nil
     var keyboardAdjusted = false
     var lastKeyboardOffset : CGFloat = 0.0

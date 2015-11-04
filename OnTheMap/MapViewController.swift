@@ -25,6 +25,8 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ParseClient.sharedInstance().setupMap() { (success, annotations, error) in
