@@ -41,7 +41,7 @@ class ParseClient {
         var annotations = [MKPointAnnotation]()
         
         // Initialize parameters
-        let parameters = ["limit": 100]
+        let parameters = ["limit": 100, "order": "-updatedAt"]
         
         // Build the URL
         let urlString = "https://api.parse.com/1/classes/StudentLocation" + ParseClient.escapedParameters(parameters)

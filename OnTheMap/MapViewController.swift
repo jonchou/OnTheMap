@@ -26,7 +26,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         ParseClient.sharedInstance().setupMap() { (success, annotations, error) in
@@ -53,11 +52,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             pinView!.canShowCallout = true
             pinView!.pinTintColor = UIColor.redColor()
             pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-        }
-        else {
+        } else {
             pinView!.annotation = annotation
         }
-    
+        
         return pinView
     }
     
@@ -71,7 +69,5 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
-
-
 }
 

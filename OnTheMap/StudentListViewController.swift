@@ -25,21 +25,18 @@ class StudentListViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("studentCell")! as UITableViewCell
-        let myStudent = ParseClient.sharedInstance().myAnnotations[indexPath.row].title
+        let studentName = ParseClient.sharedInstance().myAnnotations[indexPath.row].title
         
         // set the image and text
         cell.imageView?.image = UIImage(named: "Pin")
-        cell.textLabel?.text = myStudent
+        cell.textLabel?.text = studentName
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
- /*       let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        detailController.meme = memes[indexPath.row]
-        navigationController!.pushViewController(detailController, animated: true)
-        
-*/      let app = UIApplication.sharedApplication()
+        // TODO: check url syntax?
+        let app = UIApplication.sharedApplication()
         if let myURL = ParseClient.sharedInstance().myAnnotations[indexPath.row].subtitle {
             app.openURL(NSURL(string: myURL)!)
         } else {
