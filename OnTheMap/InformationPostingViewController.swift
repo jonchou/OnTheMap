@@ -15,7 +15,12 @@ class InformationPostingViewController: UIViewController {
     @IBOutlet weak var studentLocation: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var cancelButton: UIButton!
+    
     @IBAction func leaveView(sender: AnyObject) {
+//        mapView.hidden = true
+//        cancelButton.tintColor = UIColor.blueColor()
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -32,7 +37,7 @@ class InformationPostingViewController: UIViewController {
                 annotation.coordinate = coordinates
                 self.mapView.addAnnotation(annotation)
                 // zoom in on region
-                let mySpan = MKCoordinateSpanMake(1.0, 1.0)
+                let mySpan = MKCoordinateSpanMake(0.5, 0.5)
                 let myRegion = MKCoordinateRegionMake(coordinates, mySpan)
                 self.mapView.region = myRegion
             }
@@ -42,5 +47,8 @@ class InformationPostingViewController: UIViewController {
     func configureUI() {
         //TODO: configure hiding UI
         mapView.hidden = false
+        studentLocation.hidden = true
+        topView.hidden = true
+        cancelButton.tintColor = UIColor.whiteColor()
     }
 }
