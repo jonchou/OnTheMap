@@ -16,11 +16,12 @@ class InformationPostingViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var urlTextField: UITextField!
     
     @IBAction func leaveView(sender: AnyObject) {
-//        mapView.hidden = true
-//        cancelButton.tintColor = UIColor.blueColor()
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -49,6 +50,10 @@ class InformationPostingViewController: UIViewController {
         mapView.hidden = false
         studentLocation.hidden = true
         topView.hidden = true
+        bottomView.hidden = true
         cancelButton.tintColor = UIColor.whiteColor()
+        submitButton.hidden = false
+        urlTextField.hidden = false
+        
     }
 }

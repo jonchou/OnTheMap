@@ -221,14 +221,19 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZoV-uc-bkD">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="462"/>
+                                    </mapView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2t-SF-0TC" userLabel="BottomView">
                                         <rect key="frame" x="0.0" y="334" width="600" height="128"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGF-ro-XpM">
                                                 <rect key="frame" x="100" y="45" width="400" height="42"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="0.93934009211313141" green="0.93934009211313141" blue="0.93934009211313141" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="Find on the Map"/>
+                                                <state key="normal" title="Find on the Map">
+                                                    <color key="titleColor" red="0.23137254900000001" green="0.53333333329999999" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="geoCodeLocation:" destination="Oqo-dS-tZA" eventType="touchUpInside" id="rZq-iH-FHt"/>
                                                 </connections>
@@ -242,18 +247,30 @@
                                             <constraint firstAttribute="bottom" secondItem="VGF-ro-XpM" secondAttribute="bottom" constant="41" id="Ikf-Oh-zGP"/>
                                         </constraints>
                                     </view>
-                                    <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZoV-uc-bkD">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="462"/>
-                                    </mapView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iKQ-6O-OWk">
+                                        <rect key="frame" x="150" y="379" width="300" height="42"/>
+                                        <color key="backgroundColor" red="0.93934009210000002" green="0.93934009210000002" blue="0.93934009210000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <state key="normal" title="Submit">
+                                            <color key="titleColor" red="0.23137254900000001" green="0.53333333329999999" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.23137254900000001" green="0.53333333329999999" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="I2t-SF-0TC" secondAttribute="bottom" id="71E-AR-Bwh"/>
                                     <constraint firstItem="Bf3-fN-h85" firstAttribute="top" secondItem="zRG-TU-ATE" secondAttribute="top" constant="20" id="ClY-Tz-ZKE"/>
+                                    <constraint firstItem="ZoV-uc-bkD" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" id="Di7-6z-3cc"/>
                                     <constraint firstItem="I2t-SF-0TC" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" id="Evw-Ti-zuF"/>
+                                    <constraint firstItem="ZoV-uc-bkD" firstAttribute="top" secondItem="zRG-TU-ATE" secondAttribute="top" id="JXf-U1-JjW"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZoV-uc-bkD" secondAttribute="bottom" id="Kyu-Jf-Q1b"/>
+                                    <constraint firstAttribute="bottom" secondItem="iKQ-6O-OWk" secondAttribute="bottom" constant="41" id="O3n-jn-DjU"/>
                                     <constraint firstAttribute="trailing" secondItem="I2t-SF-0TC" secondAttribute="trailing" id="Ogs-v7-FQZ"/>
                                     <constraint firstItem="Bf3-fN-h85" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" constant="10" id="Oum-XC-YAe"/>
                                     <constraint firstAttribute="trailing" secondItem="Bf3-fN-h85" secondAttribute="trailing" constant="10" id="WYl-rj-zyN"/>
+                                    <constraint firstItem="iKQ-6O-OWk" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" constant="150" id="Xq9-m5-FRe"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZoV-uc-bkD" secondAttribute="trailing" id="bCT-dU-MSt"/>
+                                    <constraint firstAttribute="trailing" secondItem="iKQ-6O-OWk" secondAttribute="trailing" constant="150" id="rko-H9-cpE"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blt-O4-Hdx">
@@ -264,25 +281,37 @@
                                     <action selector="leaveView:" destination="Oqo-dS-tZA" eventType="touchUpInside" id="bvj-F0-EX3"/>
                                 </connections>
                             </button>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter URL Here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6CI-gJ-Wl1" userLabel="UrlTextField">
+                                <rect key="frame" x="70" y="70" width="460" height="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.23137254900000001" green="0.53333333329999999" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="blt-O4-Hdx" firstAttribute="top" secondItem="4CU-2o-RFe" secondAttribute="bottom" id="2GP-IF-Slr"/>
+                            <constraint firstItem="6CI-gJ-Wl1" firstAttribute="leading" secondItem="TMF-bj-y4h" secondAttribute="leadingMargin" constant="50" id="38U-my-dFT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="blt-O4-Hdx" secondAttribute="trailing" id="4aI-pd-hCA"/>
                             <constraint firstItem="zRG-TU-ATE" firstAttribute="top" secondItem="flZ-Ao-xJt" secondAttribute="bottom" id="9sH-cg-FvY"/>
                             <constraint firstItem="zRG-TU-ATE" firstAttribute="leading" secondItem="TMF-bj-y4h" secondAttribute="leadingMargin" constant="-20" id="IeE-s1-NJA"/>
                             <constraint firstItem="PdI-kr-yPS" firstAttribute="top" secondItem="zRG-TU-ATE" secondAttribute="bottom" id="IlB-2R-dlX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="flZ-Ao-xJt" secondAttribute="trailing" constant="-20" id="ZKF-Ih-aWI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6CI-gJ-Wl1" secondAttribute="trailing" constant="50" id="bUa-We-ivB"/>
+                            <constraint firstItem="6CI-gJ-Wl1" firstAttribute="top" secondItem="4CU-2o-RFe" secondAttribute="bottom" constant="50" id="lt9-D3-AnL"/>
                             <constraint firstItem="flZ-Ao-xJt" firstAttribute="leading" secondItem="TMF-bj-y4h" secondAttribute="leadingMargin" constant="-20" id="p69-wV-TnM"/>
                             <constraint firstItem="flZ-Ao-xJt" firstAttribute="top" secondItem="TMF-bj-y4h" secondAttribute="topMargin" id="z7H-Yv-Lac"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zRG-TU-ATE" secondAttribute="trailing" constant="-20" id="zmo-qU-y24"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="bottomView" destination="I2t-SF-0TC" id="Dn3-wG-VXg"/>
                         <outlet property="cancelButton" destination="blt-O4-Hdx" id="IiA-ni-o4Y"/>
                         <outlet property="mapView" destination="ZoV-uc-bkD" id="oUI-vj-gJr"/>
                         <outlet property="studentLocation" destination="Bf3-fN-h85" id="O39-Fa-Zdt"/>
+                        <outlet property="submitButton" destination="iKQ-6O-OWk" id="Dns-s0-3gp"/>
                         <outlet property="topView" destination="flZ-Ao-xJt" id="0Z8-fL-aJ3"/>
+                        <outlet property="urlTextField" destination="6CI-gJ-Wl1" id="7qR-Cs-Z2f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ewq-Y2-1ci" userLabel="First Responder" sceneMemberID="firstResponder"/>
