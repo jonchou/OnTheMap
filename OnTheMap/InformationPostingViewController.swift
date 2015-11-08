@@ -38,7 +38,7 @@ class InformationPostingViewController: UIViewController {
                 annotation.coordinate = coordinates
                 self.mapView.addAnnotation(annotation)
                 // zoom in on region
-                let mySpan = MKCoordinateSpanMake(0.5, 0.5)
+                let mySpan = MKCoordinateSpanMake(0.1, 0.1)
                 let myRegion = MKCoordinateRegionMake(coordinates, mySpan)
                 self.mapView.region = myRegion
             }
