@@ -193,32 +193,98 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studing from?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTo-NN-Jhe">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="301"/>
-                                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blt-O4-Hdx">
-                                <rect key="frame" x="527" y="10" width="63" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Cancel"/>
-                                <connections>
-                                    <action selector="leaveView:" destination="Oqo-dS-tZA" eventType="touchUpInside" id="bvj-F0-EX3"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="flZ-Ao-xJt" userLabel="TopView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="blt-O4-Hdx">
+                                        <rect key="frame" x="527" y="10" width="63" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="leaveView:" destination="Oqo-dS-tZA" eventType="touchUpInside" id="bvj-F0-EX3"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3w-hq-F4X">
+                                        <rect key="frame" x="50" y="76" width="500" height="94"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="39"/>
+                                        <color key="textColor" red="0.23137254901960785" green="0.53333333333333333" blue="0.75294117647058822" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="d3w-hq-F4X" firstAttribute="leading" secondItem="flZ-Ao-xJt" secondAttribute="leading" constant="50" id="2H0-4j-Fyx"/>
+                                    <constraint firstAttribute="bottom" secondItem="d3w-hq-F4X" secondAttribute="bottom" constant="30" id="Egv-Kx-G5s"/>
+                                    <constraint firstAttribute="trailing" secondItem="blt-O4-Hdx" secondAttribute="trailing" constant="10" id="UpM-SV-r7P"/>
+                                    <constraint firstItem="d3w-hq-F4X" firstAttribute="centerX" secondItem="flZ-Ao-xJt" secondAttribute="centerX" id="VVR-6g-Xbw"/>
+                                    <constraint firstItem="blt-O4-Hdx" firstAttribute="top" secondItem="flZ-Ao-xJt" secondAttribute="top" constant="10" id="vK0-mF-jYE"/>
+                                    <constraint firstItem="d3w-hq-F4X" firstAttribute="top" secondItem="flZ-Ao-xJt" secondAttribute="top" constant="76" id="zTo-Kg-FqD"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zRG-TU-ATE" userLabel="MiddleView">
+                                <rect key="frame" x="0.0" y="200" width="600" height="400"/>
+                                <subviews>
+                                    <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZoV-uc-bkD">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+                                    </mapView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Your City Here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Bf3-fN-h85">
+                                        <rect key="frame" x="10" y="10" width="580" height="36"/>
+                                        <color key="backgroundColor" red="0.23137254900000001" green="0.53333333329999999" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I2t-SF-0TC" userLabel="BottomView">
+                                        <rect key="frame" x="0.0" y="272" width="600" height="128"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGF-ro-XpM">
+                                                <rect key="frame" x="100" y="50" width="400" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <state key="normal" title="Find on the Map"/>
+                                                <connections>
+                                                    <action selector="geoCodeLocation:" destination="Oqo-dS-tZA" eventType="touchUpInside" id="rZq-iH-FHt"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.85490196080000003" green="0.85490196080000003" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="VGF-ro-XpM" secondAttribute="trailing" constant="100" id="EAe-XH-fow"/>
+                                            <constraint firstItem="VGF-ro-XpM" firstAttribute="leading" secondItem="I2t-SF-0TC" secondAttribute="leading" constant="100" id="Nbw-iI-pCa"/>
+                                            <constraint firstItem="VGF-ro-XpM" firstAttribute="top" secondItem="I2t-SF-0TC" secondAttribute="top" constant="50" id="zdr-DU-oL8"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.23137254900000001" green="0.53333333329999999" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Bf3-fN-h85" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" constant="10" id="4q8-qF-p0z"/>
+                                    <constraint firstItem="I2t-SF-0TC" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" id="7Uw-uG-4Sr"/>
+                                    <constraint firstItem="ZoV-uc-bkD" firstAttribute="top" secondItem="zRG-TU-ATE" secondAttribute="top" id="8fS-G5-bF7"/>
+                                    <constraint firstAttribute="trailing" secondItem="Bf3-fN-h85" secondAttribute="trailing" constant="10" id="94i-dr-fjZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZoV-uc-bkD" secondAttribute="bottom" id="QFb-2j-o2C"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZoV-uc-bkD" secondAttribute="trailing" id="ZtJ-b6-Dr8"/>
+                                    <constraint firstItem="ZoV-uc-bkD" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" id="gMj-h2-pR6"/>
+                                    <constraint firstAttribute="bottom" secondItem="I2t-SF-0TC" secondAttribute="bottom" id="lSb-hX-2DQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="I2t-SF-0TC" secondAttribute="trailing" id="qRb-nK-iKd"/>
+                                    <constraint firstItem="Bf3-fN-h85" firstAttribute="top" secondItem="zRG-TU-ATE" secondAttribute="top" constant="10" id="wLh-GW-9ac"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.35686274509999999" green="0.76470588240000004" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="qTo-NN-Jhe" firstAttribute="top" secondItem="TMF-bj-y4h" secondAttribute="top" id="8YT-r5-4au"/>
-                            <constraint firstItem="qTo-NN-Jhe" firstAttribute="leading" secondItem="TMF-bj-y4h" secondAttribute="leading" id="BEO-KG-iWW"/>
-                            <constraint firstItem="blt-O4-Hdx" firstAttribute="top" secondItem="qTo-NN-Jhe" secondAttribute="top" constant="10" id="fmo-je-IEz"/>
-                            <constraint firstAttribute="trailing" secondItem="qTo-NN-Jhe" secondAttribute="trailing" id="uDe-S7-wAt"/>
-                            <constraint firstItem="blt-O4-Hdx" firstAttribute="trailing" secondItem="qTo-NN-Jhe" secondAttribute="trailing" constant="-10" id="wMu-fN-Ugi"/>
-                            <constraint firstItem="PdI-kr-yPS" firstAttribute="top" secondItem="qTo-NN-Jhe" secondAttribute="bottom" constant="299" id="zai-vS-cRK"/>
+                            <constraint firstItem="flZ-Ao-xJt" firstAttribute="top" secondItem="TMF-bj-y4h" secondAttribute="top" id="DmL-j5-MP5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zRG-TU-ATE" secondAttribute="trailing" constant="-20" id="Kun-zS-olb"/>
+                            <constraint firstItem="PdI-kr-yPS" firstAttribute="top" secondItem="zRG-TU-ATE" secondAttribute="bottom" id="OvQ-Nl-2r6"/>
+                            <constraint firstItem="zRG-TU-ATE" firstAttribute="leading" secondItem="TMF-bj-y4h" secondAttribute="leadingMargin" constant="-20" id="RcK-ie-2dM"/>
+                            <constraint firstItem="zRG-TU-ATE" firstAttribute="top" secondItem="flZ-Ao-xJt" secondAttribute="bottom" id="XFi-A3-9XI"/>
+                            <constraint firstAttribute="trailing" secondItem="flZ-Ao-xJt" secondAttribute="trailing" id="Yhu-Lg-XOn"/>
+                            <constraint firstItem="flZ-Ao-xJt" firstAttribute="leading" secondItem="TMF-bj-y4h" secondAttribute="leading" id="uq0-Tw-Nhs"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="ZoV-uc-bkD" id="oUI-vj-gJr"/>
+                        <outlet property="studentLocation" destination="Bf3-fN-h85" id="O39-Fa-Zdt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ewq-Y2-1ci" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
