@@ -56,9 +56,17 @@ class LoginViewController: UIViewController {
             debugTextLabel.text = "Logging in..."
             UdacityClient.sharedInstance().authenticateWithUserPass(usernameTextField.text, password: passwordTextField.text) { (success, errorString) in
                 if success {
-                   self.completeLogin()
+                    UdacityClient.sharedInstance().getUserData() {
+                        (success, error) in
+                        if success {
+                            self.completeLogin()
+                        }
+                        else {
+                            print("failed to get user data")
+                        }
+                    }
                 } else {
-                  print("Failed to log in")
+                    print("Failed to authenticate")
                 }
             }
         }

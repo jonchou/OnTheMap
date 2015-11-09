@@ -21,6 +21,8 @@ class InformationPostingViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var urlTextField: UITextField!
     
+    let annotation = MKPointAnnotation()
+    
     @IBAction func leaveView(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -34,15 +36,44 @@ class InformationPostingViewController: UIViewController {
             {(placemarks, error) -> Void in
             if let placemark = placemarks?.first {
                 let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = coordinates
-                self.mapView.addAnnotation(annotation)
+                self.annotation.coordinate = coordinates
+                self.mapView.addAnnotation(self.annotation)
                 // zoom in on region
                 let mySpan = MKCoordinateSpanMake(0.1, 0.1)
                 let myRegion = MKCoordinateRegionMake(coordinates, mySpan)
                 self.mapView.region = myRegion
+            } else {
+                    print("Couldn't assign placemark")
             }
         })
+    }
+    
+    @IBAction func submitLocation(sender: AnyObject) {
+        let jsonBody : [String: AnyObject] = [
+            "uniqueKey": UdacityClient.sharedInstance().userID!,
+            "firstName": UdacityClient.sharedInstance().firstName!,
+            "lastName": UdacityClient.sharedInstance().lastName!,
+            "mapString": studentLocation.text!,
+            "mediaURL": urlTextField.text!,
+            "latitude": annotation.coordinate.latitude,
+            "longitude": annotation.coordinate.longitude
+        ]
+        
+        // if query objectID == nil
+        // poststudentlocation
+        // else
+        // alertview for updating location ??
+        
+        ParseClient.sharedInstance().postStudentLocation(jsonBody) {
+            (success, error) in
+            if success {
+                print("success in posting student information")
+                self.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                print("failed to submit location")
+                // TODO: alert view for error to submitting location
+            }
+        }
     }
     
     func configureUI() {
@@ -56,4 +87,6 @@ class InformationPostingViewController: UIViewController {
         urlTextField.hidden = false
         
     }
+    
+
 }

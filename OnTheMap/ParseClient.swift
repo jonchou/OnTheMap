@@ -104,6 +104,54 @@ class ParseClient {
         task.resume()
     }
     
+    func postStudentLocation(jsonBody: [String:AnyObject],completionHandler: (success: Bool, error: String?) -> Void) {
+        
+        // No Parameters
+        // Build the URL
+        let urlString = "https://api.parse.com/1/classes/StudentLocation"
+        let url = NSURL(string: urlString)!
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        request.addValue(ParseClient.parseID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(ParseClient.restAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+            request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
+        }
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            guard (error == nil) else {
+                print("Posting student location failed.")
+                return
+            }
+            
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                if let response = response as? NSHTTPURLResponse {
+                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                } else if let response = response {
+                    print("Your request returned an invalid response! Response: \(response)!")
+                } else {
+                    print("Your request returned an invalid response!")
+                }
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("No data was returned by the request!")
+                return
+            }
+            
+            print(NSString(data: data, encoding: NSUTF8StringEncoding))
+            completionHandler(success: true, error: nil)
+        }
+
+        task.resume()
+    }
+    
+    
+    
     /* Helper function: Given a dictionary of parameters, convert to a string for a url */
     class func escapedParameters(parameters: [String : AnyObject]) -> String {
         var urlVars = [String]()

@@ -15,7 +15,9 @@ class UdacityClient {
     
     /* Authentication state */
     var sessionID : String? = nil
-    var userID : Int? = nil
+    var userID : String? = nil
+    var firstName: String? = nil
+    var lastName: String? = nil
     
     init() {
         session = NSURLSession.sharedSession()
@@ -74,6 +76,7 @@ class UdacityClient {
             UdacityClient.parseJSONWithCompletionHandler(newData) { (result, error) in
                 if let account = result["account"] as? [String:AnyObject] {
                     if let userKey = account["key"] as? String {
+                        self.userID = userKey
                         print("got key: \(userKey)")
                     } else {
                         completionHandler(success: false, sessionID: nil, errorString: "Failed Key")
@@ -93,6 +96,62 @@ class UdacityClient {
             }
         }
         
+        task.resume()
+    }
+    
+    func getUserData(completionHandler: (success: Bool, errorString: String?) -> Void) {
+        // No parameters
+        
+        let urlString = "https://www.udacity.com/api/users/" + userID!
+        let url = NSURL(string: urlString)!
+        
+        let request = NSMutableURLRequest(URL: url)
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            
+            guard (error == nil) else {
+                print("Login Failed (userData).")
+                return
+            }
+            
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                if let response = response as? NSHTTPURLResponse {
+                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                } else if let response = response {
+                    print("Your request returned an invalid response! Response: \(response)!")
+                } else {
+                    print("Your request returned an invalid response!")
+                }
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                print("No data was returned by the request!")
+                return
+            }
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
+      //      print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+            
+            // parse for session ID
+            UdacityClient.parseJSONWithCompletionHandler(newData) { (result, error) in
+                if let user = result["user"] as? [String:AnyObject] {
+                    if let firstName = user["first_name"] as? String {
+                        self.firstName = firstName
+                        if let lastName = user["last_name"] as? String {
+                            self.lastName = lastName
+                            completionHandler(success: true, errorString: nil)
+                        } else {
+                            completionHandler(success: false, errorString: "Failed getting last name")
+                        }
+                    } else {
+                        completionHandler(success: false, errorString: "Failed getting first name")
+                    }
+                } else {
+                    completionHandler(success: false, errorString: "Failed getting user")
+                }
+            }
+        }
         task.resume()
     }
     
