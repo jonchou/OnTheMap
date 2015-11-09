@@ -11,8 +11,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    let baseURLSecureString = "https://www.udacity.com/api/"
-    
     var session: NSURLSession!
     var tapRecognizer: UITapGestureRecognizer? = nil
     var keyboardAdjusted = false
@@ -56,17 +54,9 @@ class LoginViewController: UIViewController {
             debugTextLabel.text = "Logging in..."
             UdacityClient.sharedInstance().authenticateWithUserPass(usernameTextField.text, password: passwordTextField.text) { (success, errorString) in
                 if success {
-                    UdacityClient.sharedInstance().getUserData() {
-                        (success, error) in
-                        if success {
-                            self.completeLogin()
-                        }
-                        else {
-                            print("failed to get user data")
-                        }
-                    }
+                    self.completeLogin()
                 } else {
-                    print("Failed to authenticate")
+                    self.debugTextLabel.text = "Failed to Log in"
                 }
             }
         }
