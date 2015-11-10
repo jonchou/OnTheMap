@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     var tapRecognizer: UITapGestureRecognizer? = nil
     var keyboardAdjusted = false
     var lastKeyboardOffset : CGFloat = 0.0
+ //   var alert: UIAlertController
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -48,11 +49,17 @@ class LoginViewController: UIViewController {
             debugTextLabel.text = "Password Empty."
         } else {
             debugTextLabel.text = "Logging in..."
-            UdacityClient.sharedInstance().authenticateWithUserPass(usernameTextField.text, password: passwordTextField.text) { (success, errorString) in
+            UdacityClient.sharedInstance().authenticateWithUserPass(usernameTextField.text, password: passwordTextField.text) { (success, error) in
                 if success {
                     self.completeLogin()
                 } else {
-                    self.debugTextLabel.text = "Failed to Log in"
+                    // alertView
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.debugTextLabel.text = "Failed to login"
+                        let alert = UIAlertController(title: "Login Error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    })
                 }
             }
         }

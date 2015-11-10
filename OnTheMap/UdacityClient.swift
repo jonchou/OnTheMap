@@ -85,7 +85,7 @@ class UdacityClient {
             
             // GUARD: Was there an error?
             guard (error == nil) else {
-                print("There was an error with your request: \(error)")
+                completionHandler(result: nil, error: error)
                 return
             }
             
@@ -93,6 +93,8 @@ class UdacityClient {
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? NSHTTPURLResponse {
                     print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                    let newError = NSError(domain: "taskForPostMethod statusCode", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid username or password"])
+                    completionHandler(result: nil, error: newError)
                 } else if let response = response {
                     print("Your request returned an invalid response! Response: \(response)!")
                 } else {
@@ -103,7 +105,8 @@ class UdacityClient {
             
             // GUARD: Was there any data returned?
             guard let data = data else {
-                print("No data was returned by the request!")
+                let newError = NSError(domain: "taskForPostMethod data", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data was returned by the request!"])
+                completionHandler(result: nil, error: newError)
                 return
             }
             

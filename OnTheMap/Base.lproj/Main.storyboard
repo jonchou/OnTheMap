@@ -59,6 +59,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Udacity" translatesAutoresizingMaskIntoConstraints="NO" id="8uT-AE-JNg">
+                                <rect key="frame" x="230" y="68" width="140" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="F5G-uH-TRE"/>
+                                    <constraint firstAttribute="width" constant="140" id="QmQ-P7-2PJ"/>
+                                </constraints>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ONS-oh-OLA">
                                 <rect key="frame" x="20" y="275" width="560" height="50"/>
                                 <color key="backgroundColor" red="1" green="0.94509803920000002" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -79,14 +86,16 @@
                             <constraint firstItem="YGH-Th-Sm3" firstAttribute="leading" secondItem="nfX-zs-CaO" secondAttribute="leadingMargin" constant="50" id="K2a-y0-fOq"/>
                             <constraint firstItem="oWD-j0-Le0" firstAttribute="leading" secondItem="4bb-CS-iKl" secondAttribute="leading" id="KCT-kR-Xev"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YGH-Th-Sm3" secondAttribute="trailing" constant="50" id="QWv-Lj-hFr"/>
-                            <constraint firstItem="ONS-oh-OLA" firstAttribute="top" secondItem="nfX-zs-CaO" secondAttribute="top" constant="275" id="TY0-97-alF"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="top" secondItem="YGH-Th-Sm3" secondAttribute="bottom" constant="23" id="UKj-YJ-RAU"/>
+                            <constraint firstItem="8uT-AE-JNg" firstAttribute="centerX" secondItem="YGH-Th-Sm3" secondAttribute="centerX" id="anQ-Wm-WYC"/>
                             <constraint firstItem="oWD-j0-Le0" firstAttribute="trailing" secondItem="4bb-CS-iKl" secondAttribute="trailing" id="eFu-9n-Z7D"/>
                             <constraint firstItem="UjU-jf-Bbv" firstAttribute="top" secondItem="POI-jr-bFo" secondAttribute="bottom" constant="10" id="nch-HY-xFN"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="leading" secondItem="4bb-CS-iKl" secondAttribute="leading" id="qC2-og-S3S"/>
                             <constraint firstItem="UjU-jf-Bbv" firstAttribute="leading" secondItem="nfX-zs-CaO" secondAttribute="leadingMargin" id="rHc-ba-loY"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="leading" secondItem="POI-jr-bFo" secondAttribute="leading" id="sgs-9m-w5s"/>
+                            <constraint firstItem="YGH-Th-Sm3" firstAttribute="top" secondItem="8uT-AE-JNg" secondAttribute="bottom" constant="10" id="uwO-u4-fW0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UjU-jf-Bbv" secondAttribute="trailing" id="vEw-iC-uPG"/>
+                            <constraint firstItem="ONS-oh-OLA" firstAttribute="top" secondItem="VxR-EO-ydv" secondAttribute="bottom" constant="255" id="vvT-6C-lKQ"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="trailing" secondItem="POI-jr-bFo" secondAttribute="trailing" id="xOs-43-rpg"/>
                             <constraint firstItem="4bb-CS-iKl" firstAttribute="top" secondItem="ONS-oh-OLA" secondAttribute="bottom" constant="8" symbolic="YES" id="y26-cE-Q8z"/>
                         </constraints>
@@ -385,6 +394,7 @@
         <image name="List" width="32" height="32"/>
         <image name="Map" width="32" height="32"/>
         <image name="Pin" width="32" height="32"/>
+        <image name="Udacity" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="unj-Ex-7V9"/>
