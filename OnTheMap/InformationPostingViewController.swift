@@ -59,6 +59,7 @@ class InformationPostingViewController: UIViewController {
             "longitude": annotation.coordinate.longitude
         ]
         
+        // FOR OVERWRITING SAME STUDENT POST
         // if query objectID == nil
         // poststudentlocation
         // else

@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class StudentListViewController: UITableViewController {
-    @IBOutlet var myTableView: UITableView!
     
+    @IBOutlet var myTableView: UITableView!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

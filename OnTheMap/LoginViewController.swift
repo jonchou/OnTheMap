@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class LoginViewController: UIViewController {
     
     var session: NSURLSession!
@@ -19,7 +18,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var debugTextLabel: UILabel!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +31,12 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         self.addKeyboardDismissRecognizer()
         self.subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
         self.removeKeyboardDismissRecognizer()
         self.unsubscribeToKeyboardNotifications()
     }
@@ -60,72 +56,23 @@ class LoginViewController: UIViewController {
                 }
             }
         }
-
     }
-    
-
     
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
-            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController")// as! UINavigationController
+            let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController")
             self.presentViewController(controller, animated: true, completion: nil)
         })
     }
-    
 }
 
 extension LoginViewController {
     
     func configureUI() {
-/*
-        /* Configure background gradient */
-        self.view.backgroundColor = UIColor.clearColor()
-        let colorTop = UIColor(red: 0.345, green: 0.839, blue: 0.988, alpha: 1.0).CGColor
-        let colorBottom = UIColor(red: 0.023, green: 0.569, blue: 0.910, alpha: 1.0).CGColor
-        self.backgroundGradient = CAGradientLayer()
-        self.backgroundGradient!.colors = [colorTop, colorBottom]
-        self.backgroundGradient!.locations = [0.0, 1.0]
-        self.backgroundGradient!.frame = view.frame
-        self.view.layer.insertSublayer(self.backgroundGradient!, atIndex: 0)
-        
-        /* Configure header text label */
-        headerTextLabel.font = UIFont(name: "AvenirNext-Medium", size: 24.0)
-        headerTextLabel.textColor = UIColor.whiteColor()
-        
-        /* Configure email textfield */
-        let emailTextFieldPaddingViewFrame = CGRectMake(0.0, 0.0, 13.0, 0.0);
-        let emailTextFieldPaddingView = UIView(frame: emailTextFieldPaddingViewFrame)
-        usernameTextField.leftView = emailTextFieldPaddingView
-        usernameTextField.leftViewMode = .Always
-        usernameTextField.font = UIFont(name: "AvenirNext-Medium", size: 17.0)
-        usernameTextField.backgroundColor = UIColor(red: 0.702, green: 0.863, blue: 0.929, alpha:1.0)
-        usernameTextField.textColor = UIColor(red: 0.0, green:0.502, blue:0.839, alpha: 1.0)
-        usernameTextField.attributedPlaceholder = NSAttributedString(string: usernameTextField.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-        usernameTextField.tintColor = UIColor(red: 0.0, green:0.502, blue:0.839, alpha: 1.0)
-        
-        /* Configure password textfield */
-        let passwordTextFieldPaddingViewFrame = CGRectMake(0.0, 0.0, 13.0, 0.0);
-        let passwordTextFieldPaddingView = UIView(frame: passwordTextFieldPaddingViewFrame)
-        passwordTextField.leftView = passwordTextFieldPaddingView
-        passwordTextField.leftViewMode = .Always
-        passwordTextField.font = UIFont(name: "AvenirNext-Medium", size: 17.0)
-        passwordTextField.backgroundColor = UIColor(red: 0.702, green: 0.863, blue: 0.929, alpha:1.0)
-        passwordTextField.textColor = UIColor(red: 0.0, green:0.502, blue:0.839, alpha: 1.0)
-        passwordTextField.attributedPlaceholder = NSAttributedString(string: passwordTextField.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-        passwordTextField.tintColor = UIColor(red: 0.0, green:0.502, blue:0.839, alpha: 1.0)
-        
-        /* Configure debug text label */
-        headerTextLabel.font = UIFont(name: "AvenirNext-Medium", size: 20)
-        headerTextLabel.textColor = UIColor.whiteColor()
- */
         /* Configure tap recognizer */
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tapRecognizer?.numberOfTapsRequired = 1
-        
     }
-}
-
-extension LoginViewController {
     
     func addKeyboardDismissRecognizer() {
         view.addGestureRecognizer(tapRecognizer!)
