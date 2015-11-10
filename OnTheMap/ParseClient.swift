@@ -10,13 +10,7 @@ import Foundation
 import MapKit
 
 class ParseClient {
-    
-    static let parseID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
-    static let restAPIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
-    
-    /* Shared session */
     var session: NSURLSession
-    
     var myAnnotations: [MKPointAnnotation]
     
     init() {
@@ -24,41 +18,25 @@ class ParseClient {
         myAnnotations = [MKPointAnnotation]()
     }
     
-    // redundant function?
-    func setupMap(completionHandler: (success: Bool, annotations: [MKPointAnnotation]?, error: String?) -> Void) {
-        getStudentLocations() { (success, annotations, error) in
-            if success {
-                self.myAnnotations = annotations
-                completionHandler(success: true, annotations: annotations, error: nil)
-            } else {
-                completionHandler(success: false, annotations: nil, error: error)
-
-            }
-        }
-    }
-    
-    func getStudentLocations(completionHandler: (success: Bool, annotations: [MKPointAnnotation], error: String?) -> Void) {
-        var annotations = [MKPointAnnotation]()
-        
-        // Initialize parameters
-        let parameters = ["limit": 100, "order": "-updatedAt"]
-        
-        // Build the URL
-        let urlString = "https://api.parse.com/1/classes/StudentLocation" + ParseClient.escapedParameters(parameters)
+    func taskForGETMethod(method: String, parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+        // Build the URL and configure the request
+        let urlString = Constants.baseURLSecureString + method + ParseClient.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
+        let request = NSMutableURLRequest(URL: url)
+        
+        request.addValue(ParseClient.Constants.parseID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(ParseClient.Constants.restAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
         // Make the request
-        let request = NSMutableURLRequest(URL: url)
-        request.addValue(ParseClient.parseID, forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue(ParseClient.restAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
-        
-        let task = session.dataTaskWithRequest(request) { data, response, error in
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            // GUARD: Was there an error?
             guard (error == nil) else {
-                print("Map Failed (Student Locations).")
+                print("There was an error with your request: \(error)")
                 return
             }
             
-            /* GUARD: Did we get a successful 2XX response? */
+            // GUARD: Did we get a successful 2XX response?
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? NSHTTPURLResponse {
                     print("Your request returned an invalid response! Status code: \(response.statusCode)!")
@@ -70,62 +48,44 @@ class ParseClient {
                 return
             }
             
-            /* GUARD: Was there any data returned? */
+            // GUARD: Was there any data returned?
             guard let data = data else {
                 print("No data was returned by the request!")
                 return
             }
             
-            UdacityClient.parseJSONWithCompletionHandler(data) { (result, error) in
-                for dictionary in result["results"] as! [[String:AnyObject]] {
-                    // Notice that the float values are being used to create CLLocationDegree values.
-                    // This is a version of the Double type.
-                    let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                    let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-                    
-                    // The lat and long are used to create a CLLocationCoordinates2D instance.
-                    let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                    let first = dictionary["firstName"] as! String
-                    let last = dictionary["lastName"] as! String
-                    let mediaURL = dictionary["mediaURL"] as! String
-                    
-                    // Here we create the annotation and set its coordiate, title, and subtitle properties
-                    let annotation = MKPointAnnotation()
-                    annotation.coordinate = coordinate
-                    annotation.title = "\(first) \(last)"
-                    annotation.subtitle = mediaURL
-                    
-                    // Finally we place the annotation in an array of annotations.
-                    annotations.append(annotation)
-                }
-                completionHandler(success: true, annotations: annotations, error: nil)
-            }
+            // Parse the data and use the data (happens in completion handler)
+            UdacityClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
         }
+        
+        // Start the request
         task.resume()
+        return task
     }
-    
-    func postStudentLocation(jsonBody: [String:AnyObject],completionHandler: (success: Bool, error: String?) -> Void) {
+
+    func taskForPOSTMethod(method: String, jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
-        // No Parameters
-        // Build the URL
-        let urlString = "https://api.parse.com/1/classes/StudentLocation"
+        // Build the URL and configure the request
+        let urlString = Constants.baseURLSecureString + method
         let url = NSURL(string: urlString)!
-        
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = "POST"
-        request.addValue(ParseClient.parseID, forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue(ParseClient.restAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue(ParseClient.Constants.parseID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(ParseClient.Constants.restAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
             request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
         }
-        let task = session.dataTaskWithRequest(request) { data, response, error in
+        
+        // Make the request
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            // GUARD: Was there an error?
             guard (error == nil) else {
-                print("Posting student location failed.")
+                print("There was an error with your request: \(error)")
                 return
             }
             
-            /* GUARD: Did we get a successful 2XX response? */
+            // GUARD: Did we get a successful 2XX response?
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? NSHTTPURLResponse {
                     print("Your request returned an invalid response! Status code: \(response.statusCode)!")
@@ -137,19 +97,19 @@ class ParseClient {
                 return
             }
             
-            /* GUARD: Was there any data returned? */
+            // GUARD: Was there any data returned?
             guard let data = data else {
                 print("No data was returned by the request!")
                 return
             }
             
-            print(NSString(data: data, encoding: NSUTF8StringEncoding))
-            completionHandler(success: true, error: nil)
+            // Parse the data and use the data (happens in completion handler)
+            UdacityClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
         }
-
+        // Start the request
         task.resume()
+        return task
     }
-    
     
     /* Helper function: Given a dictionary of parameters, convert to a string for a url */
     class func escapedParameters(parameters: [String : AnyObject]) -> String {

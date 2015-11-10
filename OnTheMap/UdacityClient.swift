@@ -10,10 +10,7 @@ import Foundation
 
 class UdacityClient {
     
-    /* Shared session */
     var session: NSURLSession
-    
-    /* Authentication state */
     var sessionID : String? = nil
     var userID : String? = nil
     var firstName: String? = nil
@@ -25,21 +22,21 @@ class UdacityClient {
     
     func taskForGETMethod(method: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
-        /* 2/3. Build the URL and configure the request */
+        // Build the URL and configure the request
         let urlString = Constants.baseURLSecureString + method
         let url = NSURL(string: urlString)!
         let request = NSURLRequest(URL: url)
         
-        /* 4. Make the request */
+        // Make the request
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             
-            /* GUARD: Was there an error? */
+            // GUARD: Was there an error?
             guard (error == nil) else {
                 print("There was an error with your request: \(error)")
                 return
             }
             
-            /* GUARD: Did we get a successful 2XX response? */
+            // GUARD: Did we get a successful 2XX response?
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? NSHTTPURLResponse {
                     print("Your request returned an invalid response! Status code: \(response.statusCode)!")
@@ -51,28 +48,28 @@ class UdacityClient {
                 return
             }
             
-            /* GUARD: Was there any data returned? */
+            // GUARD: Was there any data returned?
             guard let data = data else {
                 print("No data was returned by the request!")
                 return
             }
             
-            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
+            // subset response data
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
             
-            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            // Parse the data and use the data (happens in completion handler)
             UdacityClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
         }
         
-        /* 7. Start the request */
+        // Start the request
         task.resume()
-        
         return task
     }
     
     
     func taskForPOSTMethod(method: String, jsonBody: [String:AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
-        /* 2/3. Build the URL and configure the request */
+        // Build the URL and configure the request
         let urlString = Constants.baseURLSecureString + method
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
@@ -83,16 +80,16 @@ class UdacityClient {
             request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
         }
         
-        /* 4. Make the request */
+        // Make the request
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             
-            /* GUARD: Was there an error? */
+            // GUARD: Was there an error?
             guard (error == nil) else {
                 print("There was an error with your request: \(error)")
                 return
             }
             
-            /* GUARD: Did we get a successful 2XX response? */
+            // GUARD: Did we get a successful 2XX response?
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? NSHTTPURLResponse {
                     print("Your request returned an invalid response! Status code: \(response.statusCode)!")
@@ -104,21 +101,21 @@ class UdacityClient {
                 return
             }
             
-            /* GUARD: Was there any data returned? */
+            // GUARD: Was there any data returned?
             guard let data = data else {
                 print("No data was returned by the request!")
                 return
             }
             
-            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
+             // subset response data
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
         
-            /* 5/6. Parse the data and use the data (happens in completion handler) */
+            // Parse the data and use the data (happens in completion handler)
             UdacityClient.parseJSONWithCompletionHandler(newData, completionHandler: completionHandler)
         }
         
-        /* 7. Start the request */
+        // Start the request
         task.resume()
-        
         return task
     }
     
