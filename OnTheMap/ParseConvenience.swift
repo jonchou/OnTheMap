@@ -22,6 +22,7 @@ extension ParseClient {
                 completionHandler(success: false, error: error)
                 return
             } else {
+                self.myAnnotations = [MKPointAnnotation]()
                 for dictionary in result["results"] as! [[String:AnyObject]] {
                     // Notice that the float values are being used to create CLLocationDegree values.
                     // This is a version of the Double type.
