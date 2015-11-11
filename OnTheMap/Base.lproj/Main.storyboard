@@ -9,7 +9,7 @@
         <!--Login View Controller-->
         <scene sceneID="LpA-7d-cyo">
             <objects>
-                <viewController id="VYu-5h-3HA" customClass="LoginViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="Login View Controller" id="VYu-5h-3HA" customClass="LoginViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="VxR-EO-ydv"/>
                         <viewControllerLayoutGuide type="bottom" id="CCN-Z8-Wvs"/>
@@ -193,6 +193,11 @@
                     <tabBarItem key="tabBarItem" title="Map" image="Map" id="U00-76-YNj"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="On The Map" id="Swy-YO-mjv">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="uc0-jd-ha5">
+                            <connections>
+                                <action selector="logout:" destination="BYZ-38-t0r" id="6bb-nz-t36"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="h8r-pr-K0I">
                                 <connections>
@@ -380,6 +385,11 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="List" image="List" id="quo-Qm-DDS"/>
                     <navigationItem key="navigationItem" title="On The Map" id="Ov9-4E-Qgm">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="xwC-Xh-qJP">
+                            <connections>
+                                <action selector="logout:" destination="L1d-5y-pIq" id="qFJ-hW-aef"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="refresh" id="ihC-pB-f1V">
                                 <connections>
@@ -426,6 +436,6 @@
         <image name="Udacity" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="unj-Ex-7V9"/>
+        <segue reference="wSm-kh-rqh"/>
     </inferredMetricsTieBreakers>
 </document>

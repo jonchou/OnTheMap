@@ -30,6 +30,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
+    @IBAction func logout(sender: AnyObject) {
+        UdacityClient.sharedInstance().logout() {
+            (success, error) in
+            if success {
+                dispatch_async(dispatch_get_main_queue(), {
+                    // go back to initial VC
+                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
+                    self.presentViewController(controller, animated: true, completion: nil)
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alert = UIAlertController(title: "Logout Error", message: "Unable to logout", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            }
+        }
+    }
     
     @IBAction func reloadMapData(sender: AnyObject) {
         // get rid of old annotations

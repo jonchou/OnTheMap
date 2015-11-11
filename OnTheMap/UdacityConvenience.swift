@@ -89,5 +89,63 @@ extension UdacityClient {
             }
         }
     }
+    
+    func logout(completionHandler: (success:Bool, error: NSError?) -> Void) {
+        // Build the URL and configure the request
+        let urlString = Constants.baseURLSecureString + Methods.Session
+        let url = NSURL(string: urlString)!
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "DELETE"
+        
+        var xsrfCookie: NSHTTPCookie? = nil
+        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+
+        let task = session.dataTaskWithRequest(request) { data, response, error in
+            
+            // GUARD: Was there an error?
+            guard (error == nil) else {
+                completionHandler(success: false, error: error)
+                return
+            }
+            
+            // GUARD: Did we get a successful 2XX response?
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                if let _ = response as? NSHTTPURLResponse {
+                    let newError = NSError(domain: "logout statusCode", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to logout"])
+                    completionHandler(success: false,error: newError)
+                } else if let response = response {
+                    print("Your request returned an invalid response! Response: \(response)!")
+                } else {
+                    print("Your request returned an invalid response!")
+                }
+                return
+            }
+            
+            // GUARD: Was there any data returned?
+            guard let data = data else {
+                let newError = NSError(domain: "logout data", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data was returned by the request!"])
+                completionHandler(success: false, error: newError)
+                return
+            }
+            
+            // don't really need this data
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
+            UdacityClient.parseJSONWithCompletionHandler(newData) {
+                (result, error) in
+                if let error = error {
+                    completionHandler(success: false, error: error)
+                } else {
+                    completionHandler(success: true, error: nil)
+                }
+            }
+        }
+        task.resume()
+    }
 
 }
