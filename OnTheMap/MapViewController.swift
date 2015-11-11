@@ -37,7 +37,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 dispatch_async(dispatch_get_main_queue(), {
                     // go back to initial VC
                     let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
-                    self.presentViewController(controller, animated: true, completion: nil)
+                    self.presentViewController(controller, animated: false, completion: nil)
                 })
             } else {
                 dispatch_async(dispatch_get_main_queue(), {

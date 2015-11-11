@@ -14,7 +14,6 @@ class LoginViewController: UIViewController {
     var tapRecognizer: UITapGestureRecognizer? = nil
     var keyboardAdjusted = false
     var lastKeyboardOffset : CGFloat = 0.0
- //   var alert: UIAlertController
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -71,6 +70,7 @@ class LoginViewController: UIViewController {
     
     func completeLogin() {
         dispatch_async(dispatch_get_main_queue(), {
+            self.debugTextLabel.text = ""
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController")
             self.presentViewController(controller, animated: true, completion: nil)
         })

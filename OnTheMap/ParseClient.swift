@@ -12,12 +12,12 @@ import MapKit
 class ParseClient {
     var session: NSURLSession
     var myAnnotations: [MKPointAnnotation]
-    var studentInformation: [StudentInformation]
+    var students: [StudentInformation]
     
     init() {
         session = NSURLSession.sharedSession()
         myAnnotations = [MKPointAnnotation]()
-        studentInformation = [StudentInformation]()
+        students = [StudentInformation]()
     }
     
     func taskForGETMethod(method: String, parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {

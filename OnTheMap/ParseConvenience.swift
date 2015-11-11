@@ -22,13 +22,14 @@ extension ParseClient {
                 completionHandler(success: false, error: error)
                 return
             } else {
-                // clean the array of annotations to initialize a new one when reloading data
+                // clean the array of annotations and students to initialize a new one when reloading data
                 self.myAnnotations = [MKPointAnnotation]()
+                self.students = [StudentInformation]()
                 // Initialize all student information into an array of the struct StudentInformation
                 for dictionary in result["results"] as! [[String:AnyObject]] {
                     let student = StudentInformation.init(dictionary: dictionary)
                     self.myAnnotations.append(student.annotation)
-                    self.studentInformation.append(student)
+                    self.students.append(student)
                 }
                 completionHandler(success: true, error: nil)
             }

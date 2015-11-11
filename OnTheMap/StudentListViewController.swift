@@ -12,18 +12,12 @@ import UIKit
 class StudentListViewController: UITableViewController {
     
     @IBOutlet var myTableView: UITableView!
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
+
     @IBAction func refreshTableView(sender: AnyObject) {
         ParseClient.sharedInstance().getStudentLocations() { (success, error) in
             if success {
                 // reloads table view
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.myTableView.reloadData()
-                })
+                self.myTableView.reloadData()
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
                     let alert = UIAlertController(title: "Map Error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
@@ -41,7 +35,7 @@ class StudentListViewController: UITableViewController {
                 dispatch_async(dispatch_get_main_queue(), {
                     // go back to initial VC
                     let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
-                    self.presentViewController(controller, animated: true, completion: nil)
+                    self.presentViewController(controller, animated: false, completion: nil)
                 })
             } else {
                 dispatch_async(dispatch_get_main_queue(), {
@@ -54,12 +48,12 @@ class StudentListViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ParseClient.sharedInstance().myAnnotations.count
+        return ParseClient.sharedInstance().students.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("studentCell")! as UITableViewCell
-        let studentName = ParseClient.sharedInstance().myAnnotations[indexPath.row].title
+        let studentName = ParseClient.sharedInstance().students[indexPath.row].annotation.title
         
         // set the image and text
         cell.imageView?.image = UIImage(named: "Pin")
@@ -71,7 +65,7 @@ class StudentListViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // TODO: check url syntax?
         let app = UIApplication.sharedApplication()
-        if let myURL = ParseClient.sharedInstance().myAnnotations[indexPath.row].subtitle {
+        if let myURL = ParseClient.sharedInstance().students[indexPath.row].annotation.subtitle {
             app.openURL(NSURL(string: myURL)!)
         } else {
             print("String URL not found")

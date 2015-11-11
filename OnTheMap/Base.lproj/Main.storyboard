@@ -297,19 +297,25 @@
                                             <action selector="submitLocation:" destination="Oqo-dS-tZA" eventType="touchUpInside" id="SPk-KR-Oxt"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="XVL-ah-uf3">
+                                        <rect key="frame" x="200" y="106" width="200" height="37"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.23137254900000001" green="0.53333333329999999" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="I2t-SF-0TC" secondAttribute="bottom" id="71E-AR-Bwh"/>
+                                    <constraint firstAttribute="trailing" secondItem="XVL-ah-uf3" secondAttribute="trailing" constant="200" id="8HK-bA-m3l"/>
                                     <constraint firstItem="Bf3-fN-h85" firstAttribute="top" secondItem="zRG-TU-ATE" secondAttribute="top" constant="20" id="ClY-Tz-ZKE"/>
                                     <constraint firstItem="ZoV-uc-bkD" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" id="Di7-6z-3cc"/>
                                     <constraint firstItem="I2t-SF-0TC" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" id="Evw-Ti-zuF"/>
                                     <constraint firstItem="ZoV-uc-bkD" firstAttribute="top" secondItem="zRG-TU-ATE" secondAttribute="top" id="JXf-U1-JjW"/>
                                     <constraint firstAttribute="bottom" secondItem="ZoV-uc-bkD" secondAttribute="bottom" id="Kyu-Jf-Q1b"/>
+                                    <constraint firstItem="XVL-ah-uf3" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" constant="200" id="M3i-Bj-sEj"/>
                                     <constraint firstAttribute="bottom" secondItem="iKQ-6O-OWk" secondAttribute="bottom" constant="41" id="O3n-jn-DjU"/>
                                     <constraint firstAttribute="trailing" secondItem="I2t-SF-0TC" secondAttribute="trailing" id="Ogs-v7-FQZ"/>
                                     <constraint firstItem="Bf3-fN-h85" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" constant="10" id="Oum-XC-YAe"/>
                                     <constraint firstAttribute="trailing" secondItem="Bf3-fN-h85" secondAttribute="trailing" constant="10" id="WYl-rj-zyN"/>
+                                    <constraint firstItem="XVL-ah-uf3" firstAttribute="top" secondItem="Bf3-fN-h85" secondAttribute="bottom" constant="50" id="WlY-5j-pWd"/>
                                     <constraint firstItem="iKQ-6O-OWk" firstAttribute="leading" secondItem="zRG-TU-ATE" secondAttribute="leading" constant="150" id="Xq9-m5-FRe"/>
                                     <constraint firstAttribute="trailing" secondItem="ZoV-uc-bkD" secondAttribute="trailing" id="bCT-dU-MSt"/>
                                     <constraint firstAttribute="trailing" secondItem="iKQ-6O-OWk" secondAttribute="trailing" constant="150" id="rko-H9-cpE"/>
@@ -347,6 +353,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="XVL-ah-uf3" id="laW-XQ-0Zx"/>
                         <outlet property="bottomView" destination="I2t-SF-0TC" id="Dn3-wG-VXg"/>
                         <outlet property="cancelButton" destination="blt-O4-Hdx" id="IiA-ni-o4Y"/>
                         <outlet property="mapView" destination="ZoV-uc-bkD" id="oUI-vj-gJr"/>
