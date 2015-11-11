@@ -49,14 +49,12 @@ extension ParseClient {
         }
     }
     
-    func postStudentLocation(jsonBody: [String:AnyObject],completionHandler: (success: Bool, error: String?) -> Void) {
+    func postStudentLocation(jsonBody: [String:AnyObject],completionHandler: (success: Bool, error: NSError?) -> Void) {
         
         taskForPOSTMethod(Methods.StudentLocation, jsonBody: jsonBody) {
             (result, error) in
             if let error = error {
-                print(error)
-                completionHandler(success: false, error: "Failed to post student location")
-                // TODO: Alert View!
+                completionHandler(success: false, error: error)
             } else {
                 completionHandler(success: true, error: nil)
             }

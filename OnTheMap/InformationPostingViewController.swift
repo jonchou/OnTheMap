@@ -30,21 +30,25 @@ class InformationPostingViewController: UIViewController {
     @IBAction func geoCodeLocation(sender: AnyObject) {
         let geoCoder =  CLGeocoder()
         
-        // ConfigureUI
-        configureUI()
         geoCoder.geocodeAddressString(studentLocation.text!, completionHandler:
             {(placemarks, error) -> Void in
-            if let placemark = placemarks?.first {
-                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
-                self.annotation.coordinate = coordinates
-                self.mapView.addAnnotation(self.annotation)
-                // zoom in on region
-                let mySpan = MKCoordinateSpanMake(0.1, 0.1)
-                let myRegion = MKCoordinateRegionMake(coordinates, mySpan)
-                self.mapView.region = myRegion
-            } else {
-                    print("Couldn't assign placemark")
-            }
+                if let placemark = placemarks?.first {
+                    let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                    self.annotation.coordinate = coordinates
+                    self.mapView.addAnnotation(self.annotation)
+                    // zoom in on region
+                    let mySpan = MKCoordinateSpanMake(0.1, 0.1)
+                    let myRegion = MKCoordinateRegionMake(coordinates, mySpan)
+                    self.mapView.region = myRegion
+                    // ConfigureUI
+                    self.configureUI()
+                } else {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        let alert = UIAlertController(title: "Geocode error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    })
+                }
         })
     }
     
@@ -59,26 +63,21 @@ class InformationPostingViewController: UIViewController {
             "longitude": annotation.coordinate.longitude
         ]
         
-        // FOR OVERWRITING SAME STUDENT POST
-        // if query objectID == nil
-        // poststudentlocation
-        // else
-        // alertview for updating location ??
-        
         ParseClient.sharedInstance().postStudentLocation(jsonBody) {
             (success, error) in
             if success {
-                print("success in posting student information")
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
-                print("failed to submit location")
-                // TODO: alert view for error to submitting location
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alert = UIAlertController(title: "POST error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
             }
         }
     }
     
     func configureUI() {
-        //TODO: configure hiding UI
         mapView.hidden = false
         studentLocation.hidden = true
         topView.hidden = true
@@ -86,8 +85,6 @@ class InformationPostingViewController: UIViewController {
         cancelButton.tintColor = UIColor.whiteColor()
         submitButton.hidden = false
         urlTextField.hidden = false
-        
     }
-    
 
 }

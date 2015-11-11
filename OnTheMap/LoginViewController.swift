@@ -41,10 +41,14 @@ class LoginViewController: UIViewController {
         self.removeKeyboardDismissRecognizer()
         self.unsubscribeToKeyboardNotifications()
     }
+    
+    @IBAction func signUpButton(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signin")!)
+    }
 
     @IBAction func loginButtonTouch(sender: AnyObject) {
         if usernameTextField.text!.isEmpty {
-            debugTextLabel.text = "Username Empty."
+            debugTextLabel.text = "Email Empty."
         } else if passwordTextField.text!.isEmpty {
             debugTextLabel.text = "Password Empty."
         } else {

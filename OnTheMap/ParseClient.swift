@@ -32,14 +32,15 @@ class ParseClient {
             
             // GUARD: Was there an error?
             guard (error == nil) else {
-                print("There was an error with your request: \(error)")
+                completionHandler(result: nil, error: error)
                 return
             }
             
             // GUARD: Did we get a successful 2XX response?
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                if let response = response as? NSHTTPURLResponse {
-                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                if let _ = response as? NSHTTPURLResponse {
+                    let newError = NSError(domain: "taskForGetMethod", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to get location"])
+                    completionHandler(result: nil, error: newError)
                 } else if let response = response {
                     print("Your request returned an invalid response! Response: \(response)!")
                 } else {
@@ -50,7 +51,8 @@ class ParseClient {
             
             // GUARD: Was there any data returned?
             guard let data = data else {
-                print("No data was returned by the request!")
+                let newError = NSError(domain: "taskForGetMethod data", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data was returned by the request!"])
+                completionHandler(result: nil, error: newError)
                 return
             }
             
@@ -81,14 +83,15 @@ class ParseClient {
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             // GUARD: Was there an error?
             guard (error == nil) else {
-                print("There was an error with your request: \(error)")
+                completionHandler(result: nil, error: error)
                 return
             }
             
             // GUARD: Did we get a successful 2XX response?
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                if let response = response as? NSHTTPURLResponse {
-                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                if let _ = response as? NSHTTPURLResponse {
+                    let newError = NSError(domain: "postStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to post location"])
+                    completionHandler(result: nil, error: newError)
                 } else if let response = response {
                     print("Your request returned an invalid response! Response: \(response)!")
                 } else {
@@ -99,7 +102,8 @@ class ParseClient {
             
             // GUARD: Was there any data returned?
             guard let data = data else {
-                print("No data was returned by the request!")
+                let newError = NSError(domain: "taskForPostMethod data", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data was returned by the request!"])
+                completionHandler(result: nil, error: newError)
                 return
             }
             

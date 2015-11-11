@@ -47,14 +47,17 @@
                                     <action selector="loginButtonTouch:" destination="VYu-5h-3HA" eventType="touchUpInside" id="A0R-Mr-F1Z"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account? Sign up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POI-jr-bFo">
-                                <rect key="frame" x="20" y="458" width="560" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POI-jr-bFo">
+                                <rect key="frame" x="30" y="460" width="212" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ear-hY-BLR"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UjU-jf-Bbv">
-                                <rect key="frame" x="20" y="492" width="560" height="0.0"/>
+                                <rect key="frame" x="20" y="502" width="560" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -75,28 +78,43 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRd-YZ-stL">
+                                <rect key="frame" x="262" y="462" width="85" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="7h1-wx-mh1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signUpButton:" destination="VYu-5h-3HA" eventType="touchUpInside" id="Fjz-35-HSh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.64542717591128862" blue="0.078906094895036527" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="POI-jr-bFo" firstAttribute="leading" secondItem="nfX-zs-CaO" secondAttribute="leadingMargin" id="1Eg-Rb-612"/>
-                            <constraint firstItem="POI-jr-bFo" firstAttribute="trailing" secondItem="nfX-zs-CaO" secondAttribute="trailingMargin" id="68E-WB-7om"/>
+                            <constraint firstItem="POI-jr-bFo" firstAttribute="top" secondItem="oWD-j0-Le0" secondAttribute="bottom" constant="12" id="1oq-fF-FqW"/>
                             <constraint firstItem="oWD-j0-Le0" firstAttribute="top" secondItem="4bb-CS-iKl" secondAttribute="bottom" constant="15" id="9Ht-yf-HWk"/>
-                            <constraint firstItem="POI-jr-bFo" firstAttribute="top" secondItem="oWD-j0-Le0" secondAttribute="bottom" constant="10" id="B4y-0K-iSs"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="trailing" secondItem="4bb-CS-iKl" secondAttribute="trailing" id="FyN-dX-Yuj"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="ONS-oh-OLA" secondAttribute="leading" id="I2w-JM-XaV"/>
                             <constraint firstItem="YGH-Th-Sm3" firstAttribute="leading" secondItem="nfX-zs-CaO" secondAttribute="leadingMargin" constant="50" id="K2a-y0-fOq"/>
                             <constraint firstItem="oWD-j0-Le0" firstAttribute="leading" secondItem="4bb-CS-iKl" secondAttribute="leading" id="KCT-kR-Xev"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YGH-Th-Sm3" secondAttribute="trailing" constant="50" id="QWv-Lj-hFr"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="top" secondItem="YGH-Th-Sm3" secondAttribute="bottom" constant="23" id="UKj-YJ-RAU"/>
+                            <constraint firstItem="UjU-jf-Bbv" firstAttribute="top" secondItem="POI-jr-bFo" secondAttribute="bottom" constant="12" id="aad-D9-re3"/>
                             <constraint firstItem="8uT-AE-JNg" firstAttribute="centerX" secondItem="YGH-Th-Sm3" secondAttribute="centerX" id="anQ-Wm-WYC"/>
                             <constraint firstItem="oWD-j0-Le0" firstAttribute="trailing" secondItem="4bb-CS-iKl" secondAttribute="trailing" id="eFu-9n-Z7D"/>
-                            <constraint firstItem="UjU-jf-Bbv" firstAttribute="top" secondItem="POI-jr-bFo" secondAttribute="bottom" constant="10" id="nch-HY-xFN"/>
+                            <constraint firstItem="mRd-YZ-stL" firstAttribute="top" secondItem="oWD-j0-Le0" secondAttribute="bottom" constant="14" id="g73-2a-Jzu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ONS-oh-OLA" secondAttribute="trailing" id="gMa-ne-FXo"/>
+                            <constraint firstItem="mRd-YZ-stL" firstAttribute="bottom" secondItem="POI-jr-bFo" secondAttribute="bottom" id="hto-xY-iPM"/>
+                            <constraint firstItem="POI-jr-bFo" firstAttribute="leading" secondItem="UjU-jf-Bbv" secondAttribute="leading" constant="10" id="ihK-PO-Rwz"/>
+                            <constraint firstItem="mRd-YZ-stL" firstAttribute="leading" secondItem="POI-jr-bFo" secondAttribute="trailing" constant="20" id="mM2-KV-7gg"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="leading" secondItem="4bb-CS-iKl" secondAttribute="leading" id="qC2-og-S3S"/>
                             <constraint firstItem="UjU-jf-Bbv" firstAttribute="leading" secondItem="nfX-zs-CaO" secondAttribute="leadingMargin" id="rHc-ba-loY"/>
-                            <constraint firstItem="ONS-oh-OLA" firstAttribute="leading" secondItem="POI-jr-bFo" secondAttribute="leading" id="sgs-9m-w5s"/>
                             <constraint firstItem="YGH-Th-Sm3" firstAttribute="top" secondItem="8uT-AE-JNg" secondAttribute="bottom" constant="10" id="uwO-u4-fW0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UjU-jf-Bbv" secondAttribute="trailing" id="vEw-iC-uPG"/>
                             <constraint firstItem="ONS-oh-OLA" firstAttribute="top" secondItem="VxR-EO-ydv" secondAttribute="bottom" constant="255" id="vvT-6C-lKQ"/>
-                            <constraint firstItem="ONS-oh-OLA" firstAttribute="trailing" secondItem="POI-jr-bFo" secondAttribute="trailing" id="xOs-43-rpg"/>
                             <constraint firstItem="4bb-CS-iKl" firstAttribute="top" secondItem="ONS-oh-OLA" secondAttribute="bottom" constant="8" symbolic="YES" id="y26-cE-Q8z"/>
                         </constraints>
                     </view>
@@ -175,11 +193,14 @@
                     <tabBarItem key="tabBarItem" title="Map" image="Map" id="U00-76-YNj"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="On The Map" id="Swy-YO-mjv">
-                        <barButtonItem key="rightBarButtonItem" image="Pin" id="e5N-1O-V6S">
-                            <connections>
-                                <segue destination="Oqo-dS-tZA" kind="presentation" id="unj-Ex-7V9"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="h8r-pr-K0I"/>
+                            <barButtonItem image="Pin" id="e5N-1O-V6S">
+                                <connections>
+                                    <segue destination="Oqo-dS-tZA" kind="presentation" id="unj-Ex-7V9"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -356,7 +377,7 @@
                     <tabBarItem key="tabBarItem" title="List" image="List" id="quo-Qm-DDS"/>
                     <navigationItem key="navigationItem" title="On The Map" id="Ov9-4E-Qgm">
                         <rightBarButtonItems>
-                            <barButtonItem title="Refresh" id="ihC-pB-f1V"/>
+                            <barButtonItem systemItem="refresh" id="ihC-pB-f1V"/>
                             <barButtonItem image="Pin" id="F4x-xY-Nfu">
                                 <connections>
                                     <segue destination="Oqo-dS-tZA" kind="presentation" id="wSm-kh-rqh"/>
@@ -397,6 +418,6 @@
         <image name="Udacity" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="unj-Ex-7V9"/>
+        <segue reference="wSm-kh-rqh"/>
     </inferredMetricsTieBreakers>
 </document>
