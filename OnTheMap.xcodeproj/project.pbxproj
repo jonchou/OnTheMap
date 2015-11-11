@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7B01716B1BE862E90079F86B /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B01716A1BE862E90079F86B /* ParseClient.swift */; settings = {ASSET_TAGS = (); }; };
+		7B057E681BF319FB0049F4E9 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B057E671BF319FB0049F4E9 /* StudentInformation.swift */; settings = {ASSET_TAGS = (); }; };
 		7B3A35081BF02E9D008A8FA2 /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3A35071BF02E9D008A8FA2 /* UdacityConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		7B3A350A1BF18A71008A8FA2 /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3A35091BF18A71008A8FA2 /* ParseConvenience.swift */; settings = {ASSET_TAGS = (); }; };
 		7B3A350C1BF18D4C008A8FA2 /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3A350B1BF18D4C008A8FA2 /* ParseConstants.swift */; settings = {ASSET_TAGS = (); }; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		7B01716A1BE862E90079F86B /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		7B057E671BF319FB0049F4E9 /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		7B3A35071BF02E9D008A8FA2 /* UdacityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		7B3A35091BF18A71008A8FA2 /* ParseConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConvenience.swift; sourceTree = "<group>"; };
 		7B3A350B1BF18D4C008A8FA2 /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			children = (
 				7B911BFB1BE4462E00902FD8 /* Model */,
 				7B911BE61BE34F2000902FD8 /* AppDelegate.swift */,
+				7B057E671BF319FB0049F4E9 /* StudentInformation.swift */,
 				7B911BF81BE357C400902FD8 /* Controller */,
 				7B911BEA1BE34F2000902FD8 /* Main.storyboard */,
 				7B911BED1BE34F2000902FD8 /* Assets.xcassets */,
@@ -202,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B057E681BF319FB0049F4E9 /* StudentInformation.swift in Sources */,
 				7BF7D3E11BE99D7C00EDAC7D /* StudentListViewController.swift in Sources */,
 				7B01716B1BE862E90079F86B /* ParseClient.swift in Sources */,
 				7B3A350C1BF18D4C008A8FA2 /* ParseConstants.swift in Sources */,

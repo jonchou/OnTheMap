@@ -22,27 +22,13 @@ extension ParseClient {
                 completionHandler(success: false, error: error)
                 return
             } else {
+                // clean the array of annotations to initialize a new one when reloading data
                 self.myAnnotations = [MKPointAnnotation]()
+                // Initialize all student information into an array of the struct StudentInformation
                 for dictionary in result["results"] as! [[String:AnyObject]] {
-                    // Notice that the float values are being used to create CLLocationDegree values.
-                    // This is a version of the Double type.
-                    let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                    let long = CLLocationDegrees(dictionary["longitude"] as! Double)
-                    
-                    // The lat and long are used to create a CLLocationCoordinates2D instance.
-                    let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                    let first = dictionary["firstName"] as! String
-                    let last = dictionary["lastName"] as! String
-                    let mediaURL = dictionary["mediaURL"] as! String
-                    
-                    // Here we create the annotation and set its coordinate, title, and subtitle properties
-                    let annotation = MKPointAnnotation()
-                    annotation.coordinate = coordinate
-                    annotation.title = "\(first) \(last)"
-                    annotation.subtitle = mediaURL
-                    
-                    // Finally we place the annotation in an array of annotations.
-                    self.myAnnotations.append(annotation)
+                    let student = StudentInformation.init(dictionary: dictionary)
+                    self.myAnnotations.append(student.annotation)
+                    self.studentInformation.append(student)
                 }
                 completionHandler(success: true, error: nil)
             }
