@@ -15,8 +15,23 @@ class StudentListViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        // reloads the data when adding a new student?
-    //    myTableView!.reloadData()
+    }
+    
+    @IBAction func refreshTableView(sender: AnyObject) {
+        ParseClient.sharedInstance().getStudentLocations() { (success, error) in
+            if success {
+                // reloads table view
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.myTableView.reloadData()
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alert = UIAlertController(title: "Map Error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

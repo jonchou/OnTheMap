@@ -38,8 +38,9 @@ class UdacityClient {
             
             // GUARD: Did we get a successful 2XX response?
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                if let response = response as? NSHTTPURLResponse {
-                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                if let _ = response as? NSHTTPURLResponse {
+                    let newError = NSError(domain: "taskForGetMethod statusCode", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to get user data"])
+                    completionHandler(result: nil, error: newError)
                 } else if let response = response {
                     print("Your request returned an invalid response! Response: \(response)!")
                 } else {
@@ -50,7 +51,8 @@ class UdacityClient {
             
             // GUARD: Was there any data returned?
             guard let data = data else {
-                print("No data was returned by the request!")
+                let newError = NSError(domain: "taskForGetMethod data", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data was returned by the request!"])
+                completionHandler(result: nil, error: newError)
                 return
             }
             

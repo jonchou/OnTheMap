@@ -21,6 +21,11 @@ extension UdacityClient {
         }
     }
     
+    func createError(domain: String, errorMessage: String, completionHandler: (success: Bool, error: NSError) -> Void) {
+        let newError = NSError(domain: domain, code: 0, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+        completionHandler(success: false, error: newError)
+    }
+    
     func createSession(username: String?, password: String?, completionHandler: (success: Bool, error: NSError?) -> Void) {
         // Set parameters
         let jsonBody : [String: AnyObject] = [
@@ -43,16 +48,16 @@ extension UdacityClient {
                             self.sessionID = sessionID
                             completionHandler(success: true, error: nil)
                         } else {
-        //                    completionHandler(success: false, errorString: "Failed to get session ID")
+                            self.createError("createSession", errorMessage: "Failed to get SessionID", completionHandler: completionHandler)
                         }
                     } else {
-     //                   completionHandler(success: false, errorString: "Failed to get session")
+                        self.createError("createSession", errorMessage: "Failed to get session", completionHandler: completionHandler)
                     }
                 } else {
-    //                completionHandler(success: false, errorString: "Failed to get user key")
+                    self.createError("createSession", errorMessage: "Failed to get user key", completionHandler: completionHandler)
                 }
             } else {
-    //            completionHandler(success: false, errorString: "Failed to get account")
+                self.createError("createSession", errorMessage: "Failed to get account", completionHandler: completionHandler)
             }
         }
     }
@@ -63,6 +68,10 @@ extension UdacityClient {
         
         taskForGETMethod(mutableMethod) {
             (result, error) in
+            if let error = error {
+                completionHandler(success: false, error: error)
+                return
+            }
             if let user = result["user"] as? [String:AnyObject] {
                 if let firstName = user["first_name"] as? String {
                     self.firstName = firstName
@@ -70,13 +79,13 @@ extension UdacityClient {
                         self.lastName = lastName
                         completionHandler(success: true, error: nil)
                     } else {
-  //                      completionHandler(success: false, errorString: "Failed getting last name")
+                        self.createError("getUserData", errorMessage: "Failed to get last name", completionHandler: completionHandler)
                     }
                 } else {
- //                   completionHandler(success: false, errorString: "Failed getting first name")
+                    self.createError("getUserData", errorMessage: "Failed to get first name", completionHandler: completionHandler)
                 }
             } else {
-  //              completionHandler(success: false, errorString: "Failed getting user")
+                self.createError("getUserData", errorMessage: "Failed to get user", completionHandler: completionHandler)
             }
         }
     }

@@ -11,7 +11,7 @@ import MapKit
 
 extension ParseClient {
     
-    func getStudentLocations(completionHandler: (success: Bool, error: String?) -> Void) {
+    func getStudentLocations(completionHandler: (success: Bool, error: NSError?) -> Void) {
         
         // Initialize parameters
         let parameters = ["limit": 100, "order": "-updatedAt"]
@@ -19,9 +19,8 @@ extension ParseClient {
         taskForGETMethod(Methods.StudentLocation, parameters: parameters) {
             (result, error) in
             if let error = error {
-                print(error)
-                completionHandler(success: false, error: "Failed to get student location")
-                // TODO: Alertview?
+                completionHandler(success: false, error: error)
+                return
             } else {
                 for dictionary in result["results"] as! [[String:AnyObject]] {
                     // Notice that the float values are being used to create CLLocationDegree values.

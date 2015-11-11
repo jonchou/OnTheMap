@@ -22,11 +22,35 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     self.mapView.addAnnotations(ParseClient.sharedInstance().myAnnotations)
                 })
             } else {
-                print(error)
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alert = UIAlertController(title: "Map Error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
             }
         }
     }
     
+    @IBAction func reloadMapData(sender: AnyObject) {
+        // get rid of old annotations
+        let oldMapAnnotations = ParseClient.sharedInstance().myAnnotations
+        self.mapView.removeAnnotations(oldMapAnnotations)
+        
+        ParseClient.sharedInstance().getStudentLocations() { (success, error) in
+            if success {
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.mapView.addAnnotations(ParseClient.sharedInstance().myAnnotations)
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alert = UIAlertController(title: "Map Error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            }
+        }
+        
+    }
     // Here we create a view with a "right callout accessory view".
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
