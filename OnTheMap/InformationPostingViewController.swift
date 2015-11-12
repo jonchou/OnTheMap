@@ -32,6 +32,7 @@ class InformationPostingViewController: UIViewController {
         let geoCoder =  CLGeocoder()
         activityIndicator.startAnimating()
         
+        // Geocodes location to a longitude and latitude that can be found on the map
         geoCoder.geocodeAddressString(studentLocation.text!) {
             (placemarks, error) in
             if let placemark = placemarks?.first {
@@ -45,11 +46,10 @@ class InformationPostingViewController: UIViewController {
                 // ConfigureUI
                 self.configureUI()
             } else {
+                // Show alert to user
                 dispatch_async(dispatch_get_main_queue(), {
                     self.activityIndicator.stopAnimating()
-                    let alert = UIAlertController(title: "Geocode error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    AlertController.createAlert("Geocode Error", message: error!.localizedDescription, view: self)
                 })
             }
 
@@ -57,6 +57,7 @@ class InformationPostingViewController: UIViewController {
     }
     
     @IBAction func submitLocation(sender: AnyObject) {
+        // Initialize the JSON body that will be used in the request
         let jsonBody : [String: AnyObject] = [
             "uniqueKey": UdacityClient.sharedInstance().userID!,
             "firstName": UdacityClient.sharedInstance().firstName!,
@@ -70,17 +71,18 @@ class InformationPostingViewController: UIViewController {
         ParseClient.sharedInstance().postStudentLocation(jsonBody) {
             (success, error) in
             if success {
+                // Go back to the tab bar view controller
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
+                // Show alert to user
                 dispatch_async(dispatch_get_main_queue(), {
-                    let alert = UIAlertController(title: "POST error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    AlertController.createAlert("Post Error", message: error!.localizedDescription, view: self)
                 })
             }
         }
     }
     
+    // Configures the UI so we don't need another view controller
     func configureUI() {
         mapView.hidden = false
         studentLocation.hidden = true

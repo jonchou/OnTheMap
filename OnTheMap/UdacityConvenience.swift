@@ -91,6 +91,7 @@ extension UdacityClient {
     }
     
     func logout(completionHandler: (success:Bool, error: NSError?) -> Void) {
+        
         // Build the URL and configure the request
         let urlString = Constants.baseURLSecureString + Methods.Session
         let url = NSURL(string: urlString)!
@@ -107,7 +108,6 @@ extension UdacityClient {
         }
 
         let task = session.dataTaskWithRequest(request) { data, response, error in
-            
             // GUARD: Was there an error?
             guard (error == nil) else {
                 completionHandler(success: false, error: error)
@@ -119,10 +119,6 @@ extension UdacityClient {
                 if let _ = response as? NSHTTPURLResponse {
                     let newError = NSError(domain: "logout statusCode", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to logout"])
                     completionHandler(success: false,error: newError)
-                } else if let response = response {
-                    print("Your request returned an invalid response! Response: \(response)!")
-                } else {
-                    print("Your request returned an invalid response!")
                 }
                 return
             }
@@ -134,7 +130,7 @@ extension UdacityClient {
                 return
             }
             
-            // don't really need this data
+            // Returns logout response data
             let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5)) /* subset response data! */
             UdacityClient.parseJSONWithCompletionHandler(newData) {
                 (result, error) in

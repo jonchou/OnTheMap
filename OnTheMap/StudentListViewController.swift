@@ -16,13 +16,12 @@ class StudentListViewController: UITableViewController {
     @IBAction func refreshTableView(sender: AnyObject) {
         ParseClient.sharedInstance().getStudentLocations() { (success, error) in
             if success {
-                // reloads table view
+                // Reloads table view with new annotations
                 self.myTableView.reloadData()
             } else {
+                // Show alert to user
                 dispatch_async(dispatch_get_main_queue(), {
-                    let alert = UIAlertController(title: "Map Error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    AlertController.createAlert("Map Error", message: error!.localizedDescription, view: self)
                 })
             }
         }
@@ -32,25 +31,26 @@ class StudentListViewController: UITableViewController {
         UdacityClient.sharedInstance().logout() {
             (success, error) in
             if success {
+                // Go back to login view controller
                 dispatch_async(dispatch_get_main_queue(), {
-                    // go back to initial VC
                     let controller = self.storyboard!.instantiateViewControllerWithIdentifier("LoginViewController")
                     self.presentViewController(controller, animated: false, completion: nil)
                 })
             } else {
+                // Show alert to user
                 dispatch_async(dispatch_get_main_queue(), {
-                    let alert = UIAlertController(title: "Logout Error", message: "Unable to logout", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    AlertController.createAlert("Logout Error", message: "Unable to logout", view: self)
                 })
             }
         }
     }
     
+    // Gets the number of rows for the table view
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ParseClient.sharedInstance().students.count
     }
     
+    // Creates the cell
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("studentCell")! as UITableViewCell
         let studentName = ParseClient.sharedInstance().students[indexPath.row].annotation.title
@@ -62,16 +62,12 @@ class StudentListViewController: UITableViewController {
         return cell
     }
     
+    // Opens URL when cell is selected
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // TODO: check url syntax?
         let app = UIApplication.sharedApplication()
         if let myURL = ParseClient.sharedInstance().students[indexPath.row].annotation.subtitle {
             app.openURL(NSURL(string: myURL)!)
-        } else {
-            print("String URL not found")
         }
-
-
     }
     
 }

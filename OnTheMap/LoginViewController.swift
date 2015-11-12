@@ -21,12 +21,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        /* Get the shared URL session */
         session = NSURLSession.sharedSession()
-        
-        /* Configure the UI */
-        self.configureUI()
+        configureTapRecognizer()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -42,7 +38,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func signUpButton(sender: AnyObject) {
-        UIApplication.sharedApplication().openURL(NSURL(string: "https://www.udacity.com/account/auth#!/signin")!)
+        UIApplication.sharedApplication().openURL(NSURL(string: UdacityClient.Constants.signUpURL)!)
     }
 
     @IBAction func loginButtonTouch(sender: AnyObject) {
@@ -56,12 +52,10 @@ class LoginViewController: UIViewController {
                 if success {
                     self.completeLogin()
                 } else {
-                    // alertView
+                    // Show alert to user
                     dispatch_async(dispatch_get_main_queue(), {
                         self.debugTextLabel.text = "Failed to login"
-                        let alert = UIAlertController(title: "Login Error", message: error!.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-                        self.presentViewController(alert, animated: true, completion: nil)
+                        AlertController.createAlert("Login Error", message: error!.localizedDescription, view: self)
                     })
                 }
             }
@@ -79,8 +73,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController {
     
-    func configureUI() {
-        /* Configure tap recognizer */
+    func configureTapRecognizer() {
         tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
         tapRecognizer?.numberOfTapsRequired = 1
     }

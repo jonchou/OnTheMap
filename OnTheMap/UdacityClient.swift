@@ -29,7 +29,6 @@ class UdacityClient {
         
         // Make the request
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
-            
             // GUARD: Was there an error?
             guard (error == nil) else {
                 completionHandler(result: nil, error: error)
@@ -41,10 +40,6 @@ class UdacityClient {
                 if let _ = response as? NSHTTPURLResponse {
                     let newError = NSError(domain: "taskForGetMethod statusCode", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to get user data"])
                     completionHandler(result: nil, error: newError)
-                } else if let response = response {
-                    print("Your request returned an invalid response! Response: \(response)!")
-                } else {
-                    print("Your request returned an invalid response!")
                 }
                 return
             }
@@ -84,7 +79,6 @@ class UdacityClient {
         
         // Make the request
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
-            
             // GUARD: Was there an error?
             guard (error == nil) else {
                 completionHandler(result: nil, error: error)
@@ -96,10 +90,6 @@ class UdacityClient {
                 if let _ = response as? NSHTTPURLResponse {
                     let newError = NSError(domain: "taskForPostMethod statusCode", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid email or password"])
                     completionHandler(result: nil, error: newError)
-                } else if let response = response {
-                    print("Your request returned an invalid response! Response: \(response)!")
-                } else {
-                    print("Your request returned an invalid response!")
                 }
                 return
             }

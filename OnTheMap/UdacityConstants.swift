@@ -11,6 +11,7 @@ import Foundation
 extension UdacityClient {
     struct Constants {
         static let baseURLSecureString = "https://www.udacity.com/api/"
+        static let signUpURL = "https://www.udacity.com/account/auth#!/signin"
     }
     
     struct Methods {

@@ -22,6 +22,7 @@
 		7B911C011BE4520800902FD8 /* UdacityConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B911C001BE4520800902FD8 /* UdacityConvenience.swift */; settings = {ASSET_TAGS = (); }; };
 		7BF7D3E11BE99D7C00EDAC7D /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7D3E01BE99D7C00EDAC7D /* StudentListViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7BF7D3E31BEF06C400EDAC7D /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7D3E21BEF06C400EDAC7D /* InformationPostingViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		7BF99CE91BF449BF00570FAC /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF99CE81BF449BF00570FAC /* AlertController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		7B911C001BE4520800902FD8 /* UdacityConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConvenience.swift; sourceTree = "<group>"; };
 		7BF7D3E01BE99D7C00EDAC7D /* StudentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
 		7BF7D3E21BEF06C400EDAC7D /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
+		7BF99CE81BF449BF00570FAC /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				7B911BE81BE34F2000902FD8 /* MapViewController.swift */,
 				7BF7D3E01BE99D7C00EDAC7D /* StudentListViewController.swift */,
 				7BF7D3E21BEF06C400EDAC7D /* InformationPostingViewController.swift */,
+				7BF99CE81BF449BF00570FAC /* AlertController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BF99CE91BF449BF00570FAC /* AlertController.swift in Sources */,
 				7B057E681BF319FB0049F4E9 /* StudentInformation.swift in Sources */,
 				7BF7D3E11BE99D7C00EDAC7D /* StudentListViewController.swift in Sources */,
 				7B01716B1BE862E90079F86B /* ParseClient.swift in Sources */,

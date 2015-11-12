@@ -21,17 +21,16 @@ class ParseClient {
     }
     
     func taskForGETMethod(method: String, parameters: [String : AnyObject], completionHandler: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+        
         // Build the URL and configure the request
         let urlString = Constants.baseURLSecureString + method + ParseClient.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
         let request = NSMutableURLRequest(URL: url)
-        
         request.addValue(ParseClient.Constants.parseID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(ParseClient.Constants.restAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
         // Make the request
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
-            
             // GUARD: Was there an error?
             guard (error == nil) else {
                 completionHandler(result: nil, error: error)
@@ -41,12 +40,8 @@ class ParseClient {
             // GUARD: Did we get a successful 2XX response?
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let _ = response as? NSHTTPURLResponse {
-                    let newError = NSError(domain: "taskForGetMethod", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to get location"])
+                    let newError = NSError(domain: "taskForGetMethod statusCode", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to get location"])
                     completionHandler(result: nil, error: newError)
-                } else if let response = response {
-                    print("Your request returned an invalid response! Response: \(response)!")
-                } else {
-                    print("Your request returned an invalid response!")
                 }
                 return
             }
@@ -94,10 +89,6 @@ class ParseClient {
                 if let _ = response as? NSHTTPURLResponse {
                     let newError = NSError(domain: "postStudentLocation", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unable to post location"])
                     completionHandler(result: nil, error: newError)
-                } else if let response = response {
-                    print("Your request returned an invalid response! Response: \(response)!")
-                } else {
-                    print("Your request returned an invalid response!")
                 }
                 return
             }
