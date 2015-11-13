@@ -30,4 +30,21 @@ struct StudentInformation {
         annotation.title = "\(firstName) \(lastName)"
         annotation.subtitle = mediaURL
     }
+    
+    static func studentInformationFromResults(results: [[String : AnyObject]]) -> [StudentInformation] {
+        var students = [StudentInformation]()
+        for student in results {
+            students.append(StudentInformation(dictionary: student))
+        }
+        return students
+    }
+    
+    static func getMapAnnotationsFromResults(results: [[String: AnyObject]]) -> [MKPointAnnotation] {
+        var myAnnotations = [MKPointAnnotation]()
+        for student in results {
+            let myStudent = StudentInformation(dictionary: student)
+            myAnnotations.append(myStudent.annotation)
+        }
+        return myAnnotations
+    }
 }

@@ -22,16 +22,13 @@ extension ParseClient {
                 completionHandler(success: false, error: error)
                 return
             } else {
-                // clean the array of annotations and students to initialize a new one when reloading data
-                self.myAnnotations = [MKPointAnnotation]()
-                self.students = [StudentInformation]()
-                // Initialize all student information into an array of the struct StudentInformation
-                for dictionary in result["results"] as! [[String:AnyObject]] {
-                    let student = StudentInformation.init(dictionary: dictionary)
-                    self.myAnnotations.append(student.annotation)
-                    self.students.append(student)
+                if let results = result.valueForKey("results") as? [[String : AnyObject]] {
+                    DataModel.sharedInstance().students = StudentInformation.studentInformationFromResults(results)
+                    DataModel.sharedInstance().myAnnotations = StudentInformation.getMapAnnotationsFromResults(results)
+                    completionHandler(success: true, error: nil)
+                } else {
+                    UdacityClient.sharedInstance().createError("getStudentLocations", errorMessage: "Failed to get results", completionHandler: completionHandler)
                 }
-                completionHandler(success: true, error: nil)
             }
         }
     }

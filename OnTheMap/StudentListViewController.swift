@@ -47,13 +47,13 @@ class StudentListViewController: UITableViewController {
     
     // Gets the number of rows for the table view
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ParseClient.sharedInstance().students.count
+        return DataModel.sharedInstance().students.count
     }
     
     // Creates the cell
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("studentCell")! as UITableViewCell
-        let studentName = ParseClient.sharedInstance().students[indexPath.row].annotation.title
+        let studentName = DataModel.sharedInstance().students[indexPath.row].annotation.title
         
         // set the image and text
         cell.imageView?.image = UIImage(named: "Pin")
@@ -65,7 +65,7 @@ class StudentListViewController: UITableViewController {
     // Opens URL when cell is selected
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let app = UIApplication.sharedApplication()
-        if let myURL = ParseClient.sharedInstance().students[indexPath.row].annotation.subtitle {
+        if let myURL = DataModel.sharedInstance().students[indexPath.row].annotation.subtitle {
             app.openURL(NSURL(string: myURL)!)
         }
     }

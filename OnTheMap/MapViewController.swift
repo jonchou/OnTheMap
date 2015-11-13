@@ -20,7 +20,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             if success {
                 // Add annotations to the map
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.mapView.addAnnotations(ParseClient.sharedInstance().myAnnotations)
+                    self.mapView.addAnnotations(DataModel.sharedInstance().myAnnotations)
                 })
             } else {
                 // Show alert to user
@@ -50,14 +50,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func reloadMapData(sender: AnyObject) {
         // Remove old annotations on map
-        let oldMapAnnotations = ParseClient.sharedInstance().myAnnotations
+        let oldMapAnnotations = DataModel.sharedInstance().myAnnotations
         self.mapView.removeAnnotations(oldMapAnnotations)
         
         ParseClient.sharedInstance().getStudentLocations() { (success, error) in
             if success {
                 // Add new annotations to map
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.mapView.addAnnotations(ParseClient.sharedInstance().myAnnotations)
+                    self.mapView.addAnnotations(DataModel.sharedInstance().myAnnotations)
                 })
             } else {
                 // Show alert to user
