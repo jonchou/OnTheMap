@@ -22,7 +22,23 @@ class InformationPostingViewController: UIViewController {
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    var tapRecognizer: UITapGestureRecognizer? = nil
     let annotation = MKPointAnnotation()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureTapRecognizer()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardDismissRecognizer()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeKeyboardDismissRecognizer()
+    }
     
     @IBAction func leaveView(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -92,6 +108,27 @@ class InformationPostingViewController: UIViewController {
         submitButton.hidden = false
         urlTextField.hidden = false
         activityIndicator.stopAnimating()
+    }
+
+}
+
+extension InformationPostingViewController {
+    
+    func configureTapRecognizer() {
+        tapRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
+        tapRecognizer?.numberOfTapsRequired = 1
+    }
+    
+    func addKeyboardDismissRecognizer() {
+        view.addGestureRecognizer(tapRecognizer!)
+    }
+    
+    func removeKeyboardDismissRecognizer() {
+        view.removeGestureRecognizer(tapRecognizer!)
+    }
+    
+    func handleSingleTap(recognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
 
 }

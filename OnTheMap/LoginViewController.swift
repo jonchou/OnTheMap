@@ -27,14 +27,14 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.addKeyboardDismissRecognizer()
-        self.subscribeToKeyboardNotifications()
+        addKeyboardDismissRecognizer()
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.removeKeyboardDismissRecognizer()
-        self.unsubscribeToKeyboardNotifications()
+        removeKeyboardDismissRecognizer()
+        unsubscribeToKeyboardNotifications()
     }
     
     @IBAction func signUpButton(sender: AnyObject) {
