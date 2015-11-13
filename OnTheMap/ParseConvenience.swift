@@ -23,8 +23,7 @@ extension ParseClient {
                 return
             } else {
                 if let results = result.valueForKey("results") as? [[String : AnyObject]] {
-                    DataModel.sharedInstance().students = StudentInformation.studentInformationFromResults(results)
-                    DataModel.sharedInstance().myAnnotations = StudentInformation.getMapAnnotationsFromResults(results)
+                    StudentInformation.getStudentInformationData(results)
                     completionHandler(success: true, error: nil)
                 } else {
                     UdacityClient.sharedInstance().createError("getStudentLocations", errorMessage: "Failed to get results", completionHandler: completionHandler)

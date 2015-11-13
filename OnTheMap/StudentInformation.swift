@@ -31,20 +31,31 @@ struct StudentInformation {
         annotation.subtitle = mediaURL
     }
     
-    static func studentInformationFromResults(results: [[String : AnyObject]]) -> [StudentInformation] {
-        var students = [StudentInformation]()
-        for student in results {
-            students.append(StudentInformation(dictionary: student))
-        }
-        return students
-    }
-    
-    static func getMapAnnotationsFromResults(results: [[String: AnyObject]]) -> [MKPointAnnotation] {
-        var myAnnotations = [MKPointAnnotation]()
+    static func getStudentInformationData(results: [[String : AnyObject]]) {
+        DataModel.sharedInstance().students = [StudentInformation]()
+        DataModel.sharedInstance().myAnnotations = [MKPointAnnotation]()
         for student in results {
             let myStudent = StudentInformation(dictionary: student)
-            myAnnotations.append(myStudent.annotation)
+            DataModel.sharedInstance().students.append(StudentInformation(dictionary: student))
+            DataModel.sharedInstance().myAnnotations.append(myStudent.annotation)
+
         }
-        return myAnnotations
+    }
+}
+
+class DataModel {
+    var students: [StudentInformation]
+    var myAnnotations: [MKPointAnnotation]
+    
+    init() {
+        students = [StudentInformation]()
+        myAnnotations = [MKPointAnnotation]()
+    }
+    
+    class func sharedInstance() -> DataModel {
+        struct Singleton {
+            static var sharedInstance = DataModel()
+        }
+        return Singleton.sharedInstance
     }
 }

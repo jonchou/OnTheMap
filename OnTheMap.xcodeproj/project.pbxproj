@@ -23,7 +23,6 @@
 		7BF7D3E11BE99D7C00EDAC7D /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7D3E01BE99D7C00EDAC7D /* StudentListViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7BF7D3E31BEF06C400EDAC7D /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF7D3E21BEF06C400EDAC7D /* InformationPostingViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		7BF99CE91BF449BF00570FAC /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF99CE81BF449BF00570FAC /* AlertController.swift */; settings = {ASSET_TAGS = (); }; };
-		7BF99CEB1BF58FA300570FAC /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF99CEA1BF58FA300570FAC /* DataModel.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +44,6 @@
 		7BF7D3E01BE99D7C00EDAC7D /* StudentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
 		7BF7D3E21BEF06C400EDAC7D /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
 		7BF99CE81BF449BF00570FAC /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
-		7BF99CEA1BF58FA300570FAC /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,7 +113,6 @@
 			children = (
 				7B911BFC1BE4463A00902FD8 /* Client */,
 				7B911BE61BE34F2000902FD8 /* AppDelegate.swift */,
-				7BF99CEA1BF58FA300570FAC /* DataModel.swift */,
 				7B057E671BF319FB0049F4E9 /* StudentInformation.swift */,
 			);
 			name = Model;
@@ -218,7 +215,6 @@
 				7B3A350C1BF18D4C008A8FA2 /* ParseConstants.swift in Sources */,
 				7BF7D3E31BEF06C400EDAC7D /* InformationPostingViewController.swift in Sources */,
 				7B911BFF1BE4466100902FD8 /* UdacityClient.swift in Sources */,
-				7BF99CEB1BF58FA300570FAC /* DataModel.swift in Sources */,
 				7B911BFA1BE357ED00902FD8 /* LoginViewController.swift in Sources */,
 				7B3A350A1BF18A71008A8FA2 /* ParseConvenience.swift in Sources */,
 				7B3A35081BF02E9D008A8FA2 /* UdacityConstants.swift in Sources */,
